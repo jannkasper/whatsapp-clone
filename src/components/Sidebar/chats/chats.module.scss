@@ -1,7 +1,25 @@
 
 .chats {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 40%;
+
   background-color: #131c21;
+
+}
+
+.chats_block {
+  height: 703px;
+  overflow:hidden;
+  overflow-y:scroll;
+  display: block;
+}
+
+.chats_inner {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 1600px;
+
 }

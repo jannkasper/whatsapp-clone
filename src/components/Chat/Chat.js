@@ -6,7 +6,15 @@ function Chat() {
 
     return (
         <div className={styles.chat}>
-            NIC
+            {/*<div className={styles.nav}>*/}
+            {/*    A*/}
+            {/*</div>*/}
+            {/*<div className={styles.box}>*/}
+            {/*    B*/}
+            {/*</div>*/}
+            {/*<div className={styles.input}>*/}
+            {/*    C*/}
+            {/*</div>*/}
         </div>
     )
 }

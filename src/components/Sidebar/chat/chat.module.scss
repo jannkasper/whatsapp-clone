@@ -1,5 +1,5 @@
 
-.chat {
+.element {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -8,6 +8,10 @@
 }
 
 .imageContainer {
+  display: flex;
+  flex: none;
+  align-items: center;
+
   padding: 0 15px 0 13px;
   margin-top: 1px;
 }
@@ -17,54 +21,79 @@
   height: 49px;
   width: 49px;
   border-radius: 50%;
+  background-color: #131c21;
 }
 
 .messageContainer {
-  padding-right: 15px;
-  border-top: 1px solid #30383d;
   display: flex;
   flex-basis: auto;
   flex-direction: column;
   flex-grow: 1;
   justify-content: center;
   min-width: 0;
+  padding-right: 15px;
+  border-top: 1px solid #30383d;
 }
 
 .messageAuthor {
   display: flex;
   align-items: center;
   line-height: normal;
-  flex-grow: 1;
-  overflow: hidden;
-  font-weight: 400;
-  //line-height: 21px;
-  color: #f1f1f2eb;
-  font-size: 16px;
+  text-align: left;
 
   span {
     display: flex;
-    flex-grow: 1;
-    overflow: hidden;
     font-size: 16px;
+    text-align: left;
+    font-weight: 400;
     line-height: 21px;
-    text-overflow: ellipsis;
-    //color: black;
+    flex-grow: 1;
+    color: #f1f1f2eb;
   }
+
   div {
     flex: none;
     max-width: 100%;
+    margin-top: 3px;
+    margin-left: 6px;
+
     font-size: 12px;
+    line-height: 14px;
+    text-overflow: ellipsis;
+
+    color: #f1f1f2a1;
   }
 }
 
 .messageText {
   display: flex;
   align-items: center;
+  margin-top: 2px;
+
   min-height: 20px;
   font-size: 14px;
-  font-weight: 400;
   line-height: 20px;
 
-  text-align: left;
   color: #f1f1f2eb;
+
+  .messageText_inner {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    width: 100px;
+    overflow: hidden;
+
+    span {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+    }
+  }
 }

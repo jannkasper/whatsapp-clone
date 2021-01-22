@@ -1,5 +1,23 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
+  position: relative;
+  display: flex;
+  width: 1396px;
+  margin: 0 auto;
+  top: 19px;
+  height: calc(100% - 38px);
+
+  /*overflow-y: hidden;*/
+}
+.inner {
+  position: relative;
+  top: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /*right: -50px;*/
+  /*top: 50px;*/
 }
 
 .App-logo {
@@ -35,4 +53,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  /*font: inherit;*/
+  font-size: 100%;
+  vertical-align: initial;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }

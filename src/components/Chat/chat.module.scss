@@ -1,4 +1,25 @@
 .chat {
+  position: relative;
   display: flex;
-  width: 100vw;
+  flex-direction: column;
+  flex: 65%;
+  //background-color: #0d1418;
+  background-color: #262d31;
+}
+
+.nav {
+  height: 59px;
+  background-color: #2a2f32;
+}
+
+.box {
+  opacity: 0.1;
+  height: 1000px;
+  background-image: url("./comics.png");
+  background-repeat: repeat-x;
+}
+
+.input {
+  height: 62px;
+  background-color: #1e2428;
 }

@@ -1,6 +1,7 @@
 .sidebar {
+  position: relative;
   display: flex;
   flex-direction: column;
-  flex: .3;
-  position: relative;
+  flex: 30%;
+  background-color: #131c21;
 }
