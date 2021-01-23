@@ -1,4 +1,7 @@
 import React from "react";
+import Header from "./header";
+import Conversation from "./conversation";
+import Footer from "./footer";
 import styles from "./chat.module.scss";
 
 function Chat() {
@@ -6,15 +9,9 @@ function Chat() {
 
     return (
         <div className={styles.chat}>
-            {/*<div className={styles.nav}>*/}
-            {/*    A*/}
-            {/*</div>*/}
-            {/*<div className={styles.box}>*/}
-            {/*    B*/}
-            {/*</div>*/}
-            {/*<div className={styles.input}>*/}
-            {/*    C*/}
-            {/*</div>*/}
+            <Header />
+            <Conversation />
+            <Footer />
         </div>
     )
 }

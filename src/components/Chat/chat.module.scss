@@ -3,18 +3,18 @@
   display: flex;
   flex-direction: column;
   flex: 60%;
-  //background-color: #0d1418;
-  background-color: #262d31;
+  background-color: #0d1418;
+  //background-color: #262d31;
 }
 
 @media (min-width: 900px) {
-  .sidebar {
+  .chat {
     flex: 65%;
   }
 }
 
 @media (min-width: 1300px) {
-  .sidebar {
+  .chat {
     flex: 70%;
   }
 }
@@ -27,7 +27,7 @@
 .box {
   opacity: 0.1;
   height: 1000px;
-  background-image: url("./comics.png");
+  background-image: url("conversation/comics.png");
   background-repeat: repeat-x;
 }
 

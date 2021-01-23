@@ -8,7 +8,8 @@ function App() {
     <div className="App">
         <div className="inner">
             <Sidebar />
-            <Connect />
+            {/*<Connect />*/}
+            <Chat />
         </div>
     </div>
   );
