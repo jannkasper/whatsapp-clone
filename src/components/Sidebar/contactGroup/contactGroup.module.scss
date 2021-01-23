@@ -1,5 +1,5 @@
 
-.chats {
+.contactGroupContainer {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-.chats_block {
+.resizeView {
   display: block;
   overflow:hidden;
   overflow-y:scroll;
@@ -18,13 +18,7 @@
 }
 
 @media (min-width: 1440px) {
-  .chats_block {
+  .resizeView {
     height: calc(100vh - 235px);
   }
-}
-
-.chats_inner {
-  position: relative;
-  display: block;
-  overflow: hidden;
 }

@@ -1,4 +1,4 @@
-.header {
+.headerContainer {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -10,7 +10,7 @@
   background-color: #2a2f32;
 }
 
-.header_image {
+.userImage {
   position: relative;
   flex-grow: 1;
 
@@ -23,7 +23,7 @@
   }
 }
 
-.header_icons {
+.iconGroup {
 
   display: flex;
   flex-direction: row;

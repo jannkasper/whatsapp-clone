@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./footer.module.scss";
-import avatar from "../../Sidebar/chat/avatar.jpeg";
 
 function Footer() {
 
 
     return (
-        <div className={styles.footer}>
+        <div className={styles.footerContainer}>
 
-            <div className={styles.footer_icons}>
+            <div className={styles.iconGroup}>
                 {/*<div className={styles.icon}>*/}
                 {/*    <span data-testid="x" data-icon="x" className="">*/}
                 {/*        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">*/}
@@ -46,9 +45,9 @@ function Footer() {
                 </div>
             </div>
 
-            <input className={styles.footer_input} placeholder="Type a message"/>
+            <input className={styles.userInput} placeholder="Type a message"/>
 
-            <div className={styles.footer_icons}>
+            <div className={styles.iconGroup}>
                 <div className={styles.icon}>
                     <span data-testid="ptt" data-icon="ptt" className="">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

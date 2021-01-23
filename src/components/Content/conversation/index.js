@@ -39,11 +39,11 @@ function Conversation() {
     ]
 
     return (
-        <div className={styles.conversation}>
-            <div className={styles.conversation_background}></div>
-            <div className={styles.outer}>
-                <div ref={conversationRef} className={styles.conversation_messages}>
-                    <div ref={messagesList} className={styles.inner}>
+        <div className={styles.conversationContainer}>
+            <div className={styles.backgroundContainer}></div>
+            <div className={styles.viewSize}>
+                <div ref={conversationRef} className={styles.messageGroup}>
+                    <div ref={messagesList}>
                         {messages.map(message => <Message text={message.text} date={message.date} isOwner={message.isOwner}/>)}
                     </div>
                 </div>

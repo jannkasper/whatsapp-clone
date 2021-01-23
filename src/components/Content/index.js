@@ -2,13 +2,12 @@ import React from "react";
 import Header from "./header";
 import Conversation from "./conversation";
 import Footer from "./footer";
-import styles from "./chat.module.scss";
+import styles from "./content.module.scss";
 
-function Chat() {
-
+function Index() {
 
     return (
-        <div className={styles.chat}>
+        <div className={styles.mainContainer}>
             <Header />
             <Conversation />
             <Footer />
@@ -16,4 +15,4 @@ function Chat() {
     )
 }
 
-export default Chat
+export default Index

@@ -1,4 +1,9 @@
-.container {
+.viewResize {
+  margin-bottom: 12px;
+  padding: 0 9% 0 9%;
+}
+
+.messageContainer {
   position: relative;
   align-items: flex-end;
   display: flex;
@@ -6,12 +11,7 @@
   width: 100%;
 }
 
-.outer {
-  margin-bottom: 12px;
-  padding: 0 9% 0 9%;
-}
-
-.container_ownerCorner {
+.sendMessageCorner {
   position: absolute;
   display: block;
   top: -2px;
@@ -21,7 +21,7 @@
   color: #056162;
 }
 
-.container_guestCorner {
+.receivedMessageCorner {
   position: absolute;
   display: block;
   top: -2px;
@@ -39,21 +39,21 @@
 
   padding: 6px 7px 8px 9px;
 }
-.ownerMessage {
+.sendMessage {
   margin-left: auto;
   margin-right: 0;
   border-top-right-radius: 0;
   background-color: #056162;
 }
 
-.guestMessage {
+.receivedMessage {
   margin-right: auto;
   margin-left: 0;
   border-top-left-radius: 0;
   background-color: #262d31;
 }
 
-.message_text {
+.message_messageText {
   position: relative;
   overflow-wrap: break-word;
   white-space: pre-wrap;
@@ -71,7 +71,7 @@
   float: right;
   margin: -10px 0 -5px 4px;
 
-  .details_time {
+  .message_time {
     display: inline-block;
     vertical-align: top;
     height: 15px;
@@ -82,7 +82,7 @@
     color: #f1f1f2a1;
   }
 
-  .details_confirm {
+  .message_status {
     display: inline-block;
     margin-left: 3px;
     color: #f1f1f2a1;

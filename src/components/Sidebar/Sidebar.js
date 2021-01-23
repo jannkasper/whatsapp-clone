@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./header";
-import Form from "./form";
-import Chats from "./chats";
+import Search from "./search";
+import ContactGroup from "./contactGroup";
 
 import styles from "./sidebar.module.scss";
 import Notification from "./notification";
@@ -13,8 +13,8 @@ function Sidebar() {
         <div className={styles.sidebar}>
             <Header />
             <Notification />
-            <Form />
-            <Chats />
+            <Search />
+            <ContactGroup />
         </div>
     )
 }

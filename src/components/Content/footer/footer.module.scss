@@ -1,4 +1,4 @@
-.footer {
+.footerContainer {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -8,12 +8,10 @@
   height: 59px;
   padding: 10px 16px;
   background-color: #1e2428;
-
   bottom: 0;
-
 }
 
-.footer_icons {
+.iconGroup {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,7 +27,7 @@
   }
 }
 
-.footer_input {
+.userInput {
   display: flex;
   flex-grow: 1;
   align-items: center;

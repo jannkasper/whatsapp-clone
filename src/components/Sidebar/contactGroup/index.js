@@ -1,11 +1,10 @@
 import React from "react";
+import Contact from "../contact";
 
-import styles from "./chats.module.scss";
-import Chat from "../chat";
+import styles from "./contactGroup.module.scss";
 
 
-function Chats() {
-
+function ContactGroup() {
     const chats = [
         { name: "Nick", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
         { name: "Mark", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
@@ -21,14 +20,12 @@ function Chats() {
     ];
 
     return (
-        <div className={styles.chats}>
-            <div className={styles.chats_block}>
-                <div className={styles.chats_inner}>
-                    {chats.map(chat => <Chat name={chat.name} lastMessage={chat.message} />)}
-                </div>
+        <div className={styles.contactGroupContainer}>
+            <div className={styles.resizeView}>
+                {chats.map(chat => <Contact name={chat.name} lastMessage={chat.message} />)}
             </div>
         </div>
     )
 }
 
-export default Chats
+export default ContactGroup

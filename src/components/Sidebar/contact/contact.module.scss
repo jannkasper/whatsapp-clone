@@ -1,5 +1,5 @@
 
-.element {
+.contactContainer {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -7,24 +7,24 @@
   pointer-events: all;
 }
 
-.imageContainer {
+.contactImage {
   display: flex;
   flex: none;
   align-items: center;
 
   padding: 0 15px 0 13px;
   margin-top: 1px;
+
+  img {
+    position: relative;
+    height: 49px;
+    width: 49px;
+    border-radius: 50%;
+    background-color: #131c21;
+  }
 }
 
-.image {
-  position: relative;
-  height: 49px;
-  width: 49px;
-  border-radius: 50%;
-  background-color: #131c21;
-}
-
-.messageContainer {
+.contactDetails {
   display: flex;
   flex-basis: auto;
   flex-direction: column;
@@ -35,7 +35,7 @@
   border-top: 1px solid #30383d;
 }
 
-.messageAuthor {
+.contactName {
   display: flex;
   align-items: center;
   line-height: normal;
@@ -65,7 +65,7 @@
   }
 }
 
-.messageText {
+.contactLastMessage {
   display: flex;
   align-items: center;
   margin-top: 2px;
@@ -76,7 +76,7 @@
 
   color: #f1f1f2eb;
 
-  .messageText_inner {
+  .contactLastMessage_inner {
     position: relative;
     display: flex;
     flex-grow: 1;

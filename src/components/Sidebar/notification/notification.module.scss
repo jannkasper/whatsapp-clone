@@ -1,4 +1,4 @@
-.notification {
+.notificationContainer {
     height: 89px;
     background-color: #085373;
     cursor: pointer;
@@ -10,31 +10,31 @@
     }
 }
 
-.notification_inner {
+.viewResize {
     display: flex;
     align-items: center;
     min-height: 62px;
     padding:  13px 12px 14px 13px;
 }
 
-.notification_bell {
+.icon {
     margin-right: 15px;
     color: #8eb2be;
 }
 
-.notification_text {
+.notificationText {
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
 
-    .notification_firstLine {
+    .notificationHeader {
         font-size: 16px;
         line-height: 21px;
         color: #f1f1f2f5;
     }
 
-    .notification_secondLine {
+    .notificationDescription {
         margin-top: 2px;
         font-size: 14px;
         line-height: 19px;

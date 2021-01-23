@@ -1,15 +1,15 @@
 import './App.css';
-import Chat from "./components/Chat/Chat";
+import Content from "./components/Content";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Connect from "./components/Connect/Connect";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div className="App">
         <div className="inner">
             <Sidebar />
-            {/*<Connect />*/}
-            <Chat />
+            {/*<Home />*/}
+            <Content />
         </div>
     </div>
   );

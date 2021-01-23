@@ -1,4 +1,4 @@
-.header {
+.headerContainer {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -10,7 +10,7 @@
   background-color: #2a2f32;
 }
 
-.header_image {
+.userAvatar {
   position: relative;
   padding: 0 15px 0 0;
 
@@ -23,7 +23,7 @@
   }
 }
 
-.header_name {
+.userName {
   flex-grow: 1;
   color: #f1f1f2eb;
   font-size: 16px;
@@ -33,7 +33,7 @@
   white-space: nowrap;
 }
 
-.header_icons {
+.iconGroup {
 
   display: flex;
   flex-direction: row;

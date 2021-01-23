@@ -1,19 +1,19 @@
 import React from "react";
 import styles from "./header.module.scss";
-import avatar from "../../Sidebar/chat/avatar.jpeg";
+import avatar from "../../../img/avatar.svg";
 
 function Header() {
 
 
     return (
-        <div className={styles.header}>
-            <div className={styles.header_image}>
+        <div className={styles.headerContainer}>
+            <div className={styles.userAvatar}>
                 <img className={styles.image} src={avatar} alt="Avatar"/>
             </div>
-            <div className={styles.header_name}>
+            <div className={styles.userName}>
                 <span>Joanna Lisiak</span>
             </div>
-            <div className={styles.header_icons}>
+            <div className={styles.iconGroup}>
                 <div className={styles.icon}>
                     <span data-testid="search-alt" data-icon="search-alt" className="">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

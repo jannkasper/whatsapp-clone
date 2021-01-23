@@ -1,24 +1,24 @@
-.conversation {
+.conversationContainer {
   position: relative;
   height: 100%;
 }
-.conversation_background {
+.backgroundContainer {
   position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
   opacity: 0.06;
   height: 100%;
-  background-image: url("./comics.png");
+  background-image: url("../../../img/comics.png");
   background-repeat: repeat-x;
 }
 
-.outer {
+.viewSize {
   position: relative;
   flex: 1 1 0;
   height: 100%;
 
-  .conversation_messages {
+  .messageGroup {
     position: absolute;
     display: flex;
     flex-direction: column;
