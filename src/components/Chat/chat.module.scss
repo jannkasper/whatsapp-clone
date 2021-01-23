@@ -2,9 +2,21 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  flex: 65%;
+  flex: 60%;
   //background-color: #0d1418;
   background-color: #262d31;
+}
+
+@media (min-width: 900px) {
+  .sidebar {
+    flex: 65%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .sidebar {
+    flex: 70%;
+  }
 }
 
 .nav {
