@@ -9,3 +9,15 @@ export const listUsers = async (ctx, next) => {
         next(error);
     }
 }
+
+export const signup = async (ctx, next) => {
+    console.log("HI")
+}
+
+export const authenticate = async (ctx, next) => {
+
+}
+
+export const validateUser = async (object) => {
+    console.log("HI")
+}

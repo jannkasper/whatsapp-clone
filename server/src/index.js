@@ -1,6 +1,7 @@
 import http from "http";
 import https from "https";
 import Koa from "koa";
+import cors from 'kcors';
 import Io from 'socket.io';
 import mongoose from "mongoose";
 import config from "./config.js";
@@ -12,6 +13,14 @@ const protocol = config.protocol === 'http' ? http : https;
 // app.use(ctx => {
 //     ctx.body = 'Hello Koa';
 // });
+
+app.use(
+    cors({
+        origin: process.env.NODE_ENV === 'development' ? '*' : process.env.SITE_URL,
+        allowMethods: ['GET', 'HEAD', 'POST'],
+        credentials: true,
+    }),
+);
 
 setRoutes(app);
 

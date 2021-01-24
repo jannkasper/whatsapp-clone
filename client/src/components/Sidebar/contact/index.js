@@ -11,7 +11,7 @@ function Contact({ name, lastMessage }) {
             <div className={styles.contactImage}>
                 <img src={avatar} alt="Avatar"/>
             </div>
-            <divc className={styles.contactDetails}>
+            <div className={styles.contactDetails}>
                 <div className={styles.contactName}>
                     <span>{name}</span>
                     <div>{format(lastMessage.date, "dd/MM/yyyy")}</div>
@@ -23,7 +23,7 @@ function Contact({ name, lastMessage }) {
                         </span>
                     </div>
                 </div>
-            </divc>
+            </div>
         </div>
     )
 }

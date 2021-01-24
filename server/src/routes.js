@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 import bodyParser from "koa-body-parser";
-import { listUsers } from "./controllers/users.js";
+import { validateUser, signup, authenticate } from "./controllers/users.js";
 
 const router = new Router({ prefix: "/api"});
-
-//users
-router.get('/users', listUsers);
+//authentication
+router.post('/signup', signup);
+router.post('/authenticate', validateUser, authenticate);
 
 export default (app) => {
     app.use(bodyParser());

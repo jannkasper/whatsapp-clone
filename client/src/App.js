@@ -17,8 +17,8 @@ function App() {
             {/*<button onClick={togglePopup.bind(this)}> Click To Launch Popup</button>*/}
             <div className="inner">
                 <Sidebar />
-                {/*<Home />*/}
-                <Content />
+                <Home />
+                {/*<Content />*/}
             </div>
             <Popup
                 text='Click "Close Button" to hide popup'
