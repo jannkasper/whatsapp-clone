@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { publicFetch } from "../../util/fetcher"
 
 
@@ -16,9 +16,17 @@ const SignupForm = ({ handleChangeMode }) => {
             initialValues={{ file: null, phoneNumber: "", username: "", password: "" }}
             onSubmit={async (values, { setStatus, resetForm}) => {
                 try {
-                    const { data } = await publicFetch.post("signup", values);
+                    let formData = new FormData();
+                    formData.append('avatar', values.file);
+                    formData.append('phoneNumber', values.phoneNumber);
+                    formData.append('username', values.username);
+
+                    formData.append('password', values.password);
+
+                    const { data } = await publicFetch.post("signup", formData);
                     console.log(data)
                     resetForm({})
+                    setUserImage(avatar);
 
                 } catch (error) {
                     setStatus(error.response.data.message)
@@ -39,7 +47,6 @@ const SignupForm = ({ handleChangeMode }) => {
             //         .min(6, "Must be at least 6 characters long")
             //         .max(50, "Must be at most 50 characters long"),
             // })}
-
         >
             {
                 ({
@@ -66,7 +73,6 @@ const SignupForm = ({ handleChangeMode }) => {
                         </label>
                         <input
                             className={styles.userInput}
-                            label="phoneNumber"
                             type="text"
                             name="phoneNumber"
                             autoComplete="off"
@@ -77,7 +83,6 @@ const SignupForm = ({ handleChangeMode }) => {
                         />
                         <input
                             className={styles.userInput}
-                            label="username"
                             type="text"
                             name="username"
                             autoComplete="off"
@@ -88,7 +93,6 @@ const SignupForm = ({ handleChangeMode }) => {
                         />
                         <input
                             className={styles.userInput}
-                            label="Password"
                             type="password"
                             name="password"
                             autoComplete="off"
@@ -97,10 +101,9 @@ const SignupForm = ({ handleChangeMode }) => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        <button className={styles.signupButton} onClick={null}>Sign up</button>
+                        <button className={styles.signupButton} type="submit">Sign up</button>
                         <div className={styles.line}></div>
-                        <div className={styles.text}>Have an account? <a onClick={() => handleChangeMode()}
-                                                                         target="_blank">Log in</a></div>
+                        <div className={styles.text}>Have an account? <a href="#" onClick={() => handleChangeMode()}>Log in</a></div>
                     </form>
                 )
             }

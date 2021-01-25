@@ -2,9 +2,16 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userModel = new Schema({
+    phoneNumber: { type: Number, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true, unique: true },
-    avatarImage : { type: String, required: false, unique: false },
+    avatar : {
+        data:  Buffer,
+        contentType: String,
+        fieldName: String,
+        originalFilename: String,
+        size: Number,
+    },
     created: { type: Date, default: Date.now() }
 });
 

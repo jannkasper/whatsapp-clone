@@ -1,30 +1,26 @@
 import http from "http";
 import https from "https";
-import Koa from "koa";
-import cors from 'kcors';
-import Io from 'socket.io';
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import bodyParser from "body-parser";
+import formData from "express-form-data"
 import mongoose from "mongoose";
 import config from "./config.js";
 import setRoutes from "./routes.js"
 
-const app = new Koa();
+const app = express();
 const protocol = config.protocol === 'http' ? http : https;
 
-// app.use(ctx => {
-//     ctx.body = 'Hello Koa';
-// });
-
-app.use(
-    cors({
-        origin: process.env.NODE_ENV === 'development' ? '*' : process.env.SITE_URL,
-        allowMethods: ['GET', 'HEAD', 'POST'],
-        credentials: true,
-    }),
-);
+app.use(cors());
+app.use(morgan("dev"));
+app.use(formData.parse())
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 setRoutes(app);
 
-const server = protocol.createServer(app.callback());
+const server = protocol.createServer(app);
 
 const connect = url => {
     return mongoose.connect(url, config.db.options);
