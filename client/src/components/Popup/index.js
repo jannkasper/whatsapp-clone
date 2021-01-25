@@ -4,20 +4,18 @@ import SignupForm from "../signup-form";
 
 import styles from "./popup.module.scss";
 
-
-
-function Popup() {
-    const [isLogin, setIsLogin] = useState(false);
+function Popup({ showPopup }) {
+    const [isLogin, setIsLogin] = useState(true);
 
     const handleChangeMode = () => {
         setIsLogin(!isLogin);
     }
 
-    return (
+    return showPopup ? (
         <div className={styles.popup}>
             { isLogin ? <LoginForm handleChangeMode={handleChangeMode} /> : <SignupForm handleChangeMode={handleChangeMode} /> }
         </div>
-    );
+    ) : null;
 
 };
 
