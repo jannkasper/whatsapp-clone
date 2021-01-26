@@ -23,6 +23,12 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication }) => {
 
                     formData.append('password', values.password);
 
+                    const config = {
+                        headers: {
+                            'content-type': 'multipart/form-data'
+                        }
+                    };
+
                     const { data } = await publicFetch.post("signup", formData);
                     console.log(data)
                     receiveAuthentication(data);
@@ -61,6 +67,7 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication }) => {
                                 type="file"
                                 label="userImage"
                                 name="file"
+                                accept="image/x-png,image/gif,image/jpeg"
                                 value={values.userImage}
                                 onChange={(event) => {
                                     setFieldValue("file", event.currentTarget.files[0]);

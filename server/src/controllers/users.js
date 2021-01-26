@@ -13,19 +13,17 @@ export const signup = async (req, res) => {
 
     try {
         const { phoneNumber, username, password } = req.body;
-        const { avatar } = req.files;
+        let { avatar } = req.files;
+
+        avatar = { ...avatar,
+            data: fs.readFileSync(avatar.path).toString("base64"),
+        }
 
         const userData = {
             phoneNumber: phoneNumber,
             username: username.toLowerCase(),
             password: password,
-            avatar: {
-                fieldName: avatar.fieldName,
-                originalFilename: avatar.originalFilename,
-                size: avatar.size,
-                data: fs.readFileSync(avatar.path),
-                contentType: avatar.type
-            }
+            avatar: avatar
         };
 
         const existingUsername = await User.findOne({
