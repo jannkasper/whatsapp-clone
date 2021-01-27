@@ -5,6 +5,14 @@
   flex-direction: row;
   height: 72px;
   pointer-events: all;
+
+  &:hover {
+    background-color: #323739;
+  }
+}
+
+.contactSelected {
+   background-color: #323739;
 }
 
 .contactImage {

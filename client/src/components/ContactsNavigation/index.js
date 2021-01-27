@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { receiveAuthentication } from "../../actions";
 
 const mapStateToProps = state => {
-    return { openContactsNavigation: state.app.openContactsNavigation };
+    return {
+        openContactsNavigation: state.app.openContactsNavigation,
+        contactArray: state.contacts.contactArray,
+    };
 }
 
 const mapDispatchToProps = {

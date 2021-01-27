@@ -2,7 +2,9 @@ import Sidebar from "./Sidebar";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
-    return { openContactsNavigation: state.app.openContactsNavigation };
+    return {
+        selectedContact: state.contacts.selectedContact,
+    };
 }
 
 const mapDispatchToProps = {
