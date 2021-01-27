@@ -5,7 +5,7 @@ import avatar from "../../../img/avatar.svg";
 import styles from "./contact.module.scss";
 
 
-function Contact({ name, lastMessage }) {
+function Contact({ name, status, lastMessage }) {
     return (
         <div className={styles.contactContainer}>
             <div className={styles.contactImage}>
@@ -14,12 +14,12 @@ function Contact({ name, lastMessage }) {
             <div className={styles.contactDetails}>
                 <div className={styles.contactName}>
                     <span>{name}</span>
-                    <div>{format(lastMessage.date, "dd/MM/yyyy")}</div>
+                    { lastMessage ? <div>{format(lastMessage.date, "dd/MM/yyyy")}</div> : null}
                 </div>
                 <div className={styles.contactLastMessage}>
                     <div className={styles.contactLastMessage_inner}>
                         <span>
-                            {lastMessage.text}
+                            {lastMessage ? lastMessage.text : status}
                         </span>
                     </div>
                 </div>

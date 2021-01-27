@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./search.module.scss";
 
 
-function Search() {
+function Search({ placeHolder }) {
 
     return (
         <div className={styles.searchContainer}>
@@ -16,7 +16,7 @@ function Search() {
             </button>
 
             <div className={styles.searchInput}>
-                <input placeholder="Search or start new chat"/>
+                <input placeholder={placeHolder} />
             </div>
 
         </div>

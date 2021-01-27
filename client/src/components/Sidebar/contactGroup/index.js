@@ -4,25 +4,12 @@ import Contact from "../contact";
 import styles from "./contactGroup.module.scss";
 
 
-function ContactGroup() {
-    const chats = [
-        { name: "Nick", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Mark", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Agata", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Nick", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Mark", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Agata", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Nick", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Mark", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", date: Date.now() } },
-        { name: "Nick", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Mark", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-        { name: "Mark", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
-    ];
+function ContactGroup(props) {
 
     return (
         <div className={styles.contactGroupContainer}>
-            <div className={styles.resizeView}>
-                {chats.map(chat => <Contact name={chat.name} lastMessage={chat.message} />)}
+            <div className={`${styles.resizeView} ${props.isSidebar ? styles.sizeSidebar : styles.sizeNewChat}`}>
+                {props.chats.map(chat => <Contact name={chat.name} status={chat.status} lastMessage={chat.message} />)}
             </div>
         </div>
     )

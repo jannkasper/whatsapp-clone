@@ -1,13 +1,13 @@
 import Header from "./header";
 import { connect } from "react-redux";
-import { openContactsNavigation } from "../../../actions";
+import { closeContactsNavigation } from "../../../actions";
 
 const mapStateToProps = state => {
-    return { avatar: state.user?.avatar };
+    return { };
 }
 
 const mapDispatchToProps = {
-    openContactsNavigation
+    closeContactsNavigation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

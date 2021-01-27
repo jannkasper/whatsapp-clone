@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 // import {} from "../../actions";
 
 const mapStateToProps = state => {
-    // const user = state.user;
-    const showPopup = !Boolean(state.user.id);
+    // const showPopup = !Boolean(state.user.id);
+    const showPopup = false;
     return {
         showPopup
     }

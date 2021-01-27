@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Content from "../Content";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar";
 import Home from "../Home";
 import Popup from "../Popup";
 

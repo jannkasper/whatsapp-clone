@@ -3,7 +3,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  flex: 40%;
 
   background-color: #131c21;
   height: 100%;
@@ -14,11 +13,24 @@
   display: block;
   overflow:hidden;
   overflow-y:scroll;
+}
+
+.sizeSidebar {
   height: calc(100vh - 197px);
 }
 
 @media (min-width: 1440px) {
-  .resizeView {
+  .sizeSidebar {
     height: calc(100vh - 235px);
+  }
+}
+
+.sizeNewChat {
+  height: calc(100vh - 157px);
+}
+
+@media (min-width: 1440px) {
+  .sizeNewChat {
+    height: calc(100vh - 195px);
   }
 }
