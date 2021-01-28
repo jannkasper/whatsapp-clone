@@ -8,8 +8,7 @@ import Notification from "./notification";
 import ContactsNavigation from "../ContactsNavigation";
 
 
-function Sidebar({ selectedContact }) {
-
+function Sidebar({ selectedContact, contactArray }) {
     const chats = [
         { name: "Q", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
         { name: "W", message: {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", date: Date.now() } },
@@ -30,7 +29,7 @@ function Sidebar({ selectedContact }) {
             <Header />
             <Notification />
             <Search placeHolder={"Search or start new chat"}/>
-            <ContactGroup chats={chats} selectedContact={selectedContact} isSidebar />
+            <ContactGroup chats={contactArray} selectedContact={selectedContact} isSidebar />
         </div>
     )
 }

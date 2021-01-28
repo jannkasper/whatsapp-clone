@@ -21,7 +21,6 @@ switch (process.env.NODE_ENV) {
 
 export default (resourceName = "") => {
     const resourcePath = resourceName;
-    debugger;
     if (!host) {
         return `/${resourcePath}`
     }

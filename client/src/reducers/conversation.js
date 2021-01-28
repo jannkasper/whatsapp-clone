@@ -25,10 +25,10 @@ const initialState = {
                 {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "E"},
                 {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "Me"},
                 {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "Me"},
-                {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "E"},
-                {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "Me"},
                 {text: "Lorem ipsum dolor sit amet", date: Date.now(), author: "E"},
                 {text: "Lorem ipsum dolor sit amet", date: Date.now(), author: "Me"},
+                {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "E"},
+                {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "Me"},
             ]
         },
         {
@@ -44,13 +44,15 @@ const initialState = {
             contactName: "R",
             conversation: [
                 {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "R"},
-                {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "Me"},
                 {text: "Lorem ipsum dolor sit amet", date: Date.now(), author: "R"},
+                {text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.", date: Date.now(), author: "Me"},
             ]
         },
         {
             contactName: "T",
             conversation: [
+                {text: "Hey bro, how are you doing? :)", date: Date.now(), author: "T"},
+
             ]
         }
     ]
@@ -71,12 +73,14 @@ const conversation = (state = initialState, action) => {
             }
         case "SEND_MESSAGE":
             const newMessage = {text: action.payload.text, date: Date.now(), author: "Me"}
+            const updateConversation = {
+                ...state.selectedConversation,
+                conversation: [...state.selectedConversation.conversation, newMessage]
+            }
             return {
                 ...state,
-                selectedConversation: {
-                    ...state.selectedConversation,
-                    conversation: [...state.selectedConversation.conversation, newMessage]
-                }
+                conversationArray: [...state.conversationArray.map(element => element.contactName === updateConversation.contactName ? updateConversation : element)],
+                selectedConversation: updateConversation
             }
         default:
             return state
