@@ -1,18 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { format } from 'date-fns';
-import { setSelectedContact, closeContactsNavigation } from "../../../actions"
+import { setSelectedContact, closeContactsNavigation, selectedConversation } from "../../../actions"
 
 import avatar from "../../../img/avatar.svg";
 import styles from "./contact.module.scss";
 
 
-function Contact({ name, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation }) {
-    debugger;
+function Contact({ name, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectedConversation }) {
     return (
         <div className={`${styles.contactContainer} ${isSelected ? styles.contactSelected : null }`}
              onClick={() => {
-                 setSelectedContact({contact: {name: name}});
+                 setSelectedContact({contact: {name: name }});
+                 selectedConversation({contact: {name: name }})
                  closeContactsNavigation();
              }}>
             <div className={styles.contactImage}>
@@ -34,6 +34,6 @@ function Contact({ name, status, lastMessage, isSelected , setSelectedContact, c
         </div>
     )
 }
-const mapDispatchToProps = { setSelectedContact, closeContactsNavigation };
+const mapDispatchToProps = { setSelectedContact, closeContactsNavigation, selectedConversation };
 
 export default connect(null, mapDispatchToProps)(Contact);

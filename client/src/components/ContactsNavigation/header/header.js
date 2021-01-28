@@ -1,5 +1,4 @@
 import React from "react";
-import { Status, Chat, Menu } from "../../icons";
 import styles from "./header.module.scss";
 import { Back } from "../../icons";
 

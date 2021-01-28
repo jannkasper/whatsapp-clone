@@ -14,3 +14,11 @@ export const closeContactsNavigation = payload => async dispatch => {
 export const setSelectedContact = payload => async dispatch => {
     dispatch({ type: "SET_SELECTED_CONTACT", payload });
 };
+
+export const selectedConversation = payload => async dispatch => {
+    dispatch({ type: "SELECT_CONVERSATION", payload });
+};
+
+export const sendMessage = payload => async dispatch => {
+    dispatch({ type: "SEND_MESSAGE", payload });
+};

@@ -8,7 +8,7 @@ function Message(props) {
     return (
         <div className={styles.viewResize}>
             <div className={styles.messageContainer}>
-                { props.isOwner ? (
+                { props.isAuthor ? (
                     <div className={styles.sendMessageCorner}>
                         <span data-testid="tail-out" data-icon="tail-out" className="_3N37N">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 13" width="8" height="13">
@@ -28,16 +28,16 @@ function Message(props) {
                     </div>
                 )
                 }
-                <div className={[styles.message, props.isOwner ? styles.sendMessage : styles.receivedMessage].join(' ')}>
+                <div className={[styles.message, props.isAuthor ? styles.sendMessage : styles.receivedMessage].join(' ')}>
                     <div className={styles.message_messageText}>
                         {props.text}
-                        <span style={{width: props.isOwner ? "74px" : "54px", display: "inline-block"}}/>
+                        <span style={{width: props.isAuthor ? "74px" : "54px", display: "inline-block"}}/>
                     </div>
                     <div className={styles.message_details}>
                         <div className={styles.message_time}>
                             {format(props.date, "hh:mm")}
                         </div>
-                        {props.isOwner ?
+                        {props.isAuthor ?
                         <div className={styles.message_status}>
                             <span data-testid="msg-dblcheck" aria-label=" Read " data-icon="msg-dblcheck" className="_2XORi">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 15" width="16" height="15">

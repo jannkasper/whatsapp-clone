@@ -5,7 +5,6 @@ import styles from "./contactGroup.module.scss";
 
 
 function ContactGroup(props) {
-    debugger;
     return (
         <div className={styles.contactGroupContainer}>
             <div className={`${styles.resizeView} ${props.isSidebar ? styles.sizeSidebar : styles.sizeNewChat}`}>
