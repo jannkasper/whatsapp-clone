@@ -21,7 +21,7 @@ function Contact({ name, status, lastMessage, isSelected , setSelectedContact, c
             <div className={styles.contactDetails}>
                 <div className={styles.contactName}>
                     <span>{name}</span>
-                    { lastMessage ? <div>{format(lastMessage.date, "dd/MM/YYYY")}</div> : null}
+                    { lastMessage ? <div>{format(lastMessage.date, "dd/MM/yyyy")}</div> : null}
                 </div>
                 <div className={styles.contactLastMessage}>
                     <div className={styles.contactLastMessage_inner}>
