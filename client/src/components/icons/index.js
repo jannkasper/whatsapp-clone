@@ -11,3 +11,6 @@ export { default as Ptt } from "./Ptt";
 export { default as X } from "./X";
 export { default as Sticker } from "./Sticker";
 export { default as Gif } from "./Gif";
+export { default as TailIn } from "./TailIn";
+export { default as TailOut } from "./TailOut";
+export { default as MessageCheck } from "./MessageCheck";
