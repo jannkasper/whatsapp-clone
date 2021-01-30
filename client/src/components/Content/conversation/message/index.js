@@ -5,7 +5,6 @@ import { MessageCheck, TailIn, TailOut } from "../../../icons"
 
 function Message(props) {
 
-    debugger;
     return (
         <div className={styles.viewResize}>
             <div className={styles.messageContainer}>

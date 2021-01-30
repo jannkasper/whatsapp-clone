@@ -6,8 +6,9 @@ import { publicFetch } from "../../util/fetcher";
 
 import logo from "../../img/logo.svg";
 import styles from "./login-form.module.scss";
+import fetchConversations from "../../store/fetchConversations";
 
-const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts }) => {
+const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
 
     return (
         <Formik
@@ -17,6 +18,7 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts }) =
                     const { data } = await publicFetch.post("authenticate", values);
                     receiveAuthentication(data);
                     fetchContacts();
+                    fetchConversations(data.userInfo.externalIdentifier)
                     resetForm({})
 
                 } catch (error) {

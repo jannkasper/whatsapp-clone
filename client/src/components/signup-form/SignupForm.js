@@ -7,9 +7,10 @@ import { publicFetch } from "../../util/fetcher"
 import profileImage from "../../img/avatar.svg";
 import styles from "./signup-form.module.scss";
 import fetchContacts from "../../store/fetchContacts";
+import fetchConversations from "../../store/fetchConversations";
 
 
-const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts }) => {
+const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
 
     const [userImage, setUserImage] = useState(profileImage);
     return (
@@ -26,6 +27,7 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts }) 
                     const { data } = await publicFetch.post("signup", formData);
                     receiveAuthentication(data);
                     fetchContacts();
+                    fetchConversations(data.userInfo.externalIdentifier)
                     resetForm({})
                     setUserImage(profileImage);
 

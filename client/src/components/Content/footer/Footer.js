@@ -9,9 +9,9 @@ function Footer({ sendMessage }) {
         setValue(event.target.value);
     }
 
-    function handleKeyDown(event) {
+    async function handleKeyDown(event) {
         if (event.key === 'Enter' && value) {
-            sendMessage({ type: "text", value: value });
+            await sendMessage({ type: "text", value: value });
             setValue("");
         }
     }

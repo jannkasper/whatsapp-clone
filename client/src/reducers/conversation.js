@@ -1,5 +1,7 @@
 
 const initialState = {
+    pending: false,
+    error: null,
     selectedConversation: null,
     conversationArray: [ ]
 }
@@ -43,7 +45,23 @@ const conversation = (state = initialState, action) => {
                 conversationArray: [...state.conversationArray.map(element => element.contactExtId === updateConvWithSessionExtId.contactExtId ? updateConvWithSessionExtId : element)],
                 selectedConversation: updateConvWithSessionExtId
             }
-            return
+        case "FETCH_CONVERSATIONS_PENDING":
+            return {
+                ...state,
+                pending: true,
+            }
+        case "FETCH_CONVERSATIONS_SUCCESS":
+            return {
+                ...state,
+                pending: false,
+                conversationArray: action.payload.conversations,
+            }
+        case "FETCH_CONVERSATIONS_ERROR":
+            return {
+                ...state,
+                pending: false,
+                error: action.payload.error,
+            }
         default:
             return state
     }

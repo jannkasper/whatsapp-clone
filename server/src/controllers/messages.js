@@ -5,6 +5,76 @@ import UserSession from "../models/userSession.js";
 import Message from "../models/message.js"
 import shortId from "shortid";
 
+export const loadMessages =  async  (req, res) => {
+    const result = validationResult(req);
+
+    if (!result.isEmpty()) {
+        const errors = result.array({onlyFirstError: true });
+        return res.status(422).json({ errors });
+    }
+
+    const userExtId = req.params.userExtId;
+
+    if (!userExtId) {
+        return res.status(400).json({ message: "There was a problem retrieve conversations."})
+    }
+
+    const user = await User.findOne({
+        externalIdentifier: userExtId,
+    });
+
+    if (!user) {
+        return res.status(400).json({ message: "There was a problem retrieve conversations."})
+    }
+
+    const userSessionList = await UserSession.find({
+        userId : user.id,
+    });
+
+    if (!userSessionList) {
+        return res.status(400).json({ message: "There was a problem retrieve conversations."})
+    }
+
+    const resultArray = [];
+    for(const userSession of userSessionList) {
+        const messageList = await Message.find({
+            sessionId : userSession.sessionId,
+        }).sort("created");
+
+        const contactUserSession = await UserSession.findOne({
+            sessionId : userSession.sessionId,
+            userId: { $ne: userSession.userId },
+        });
+
+        const session = await Session.findOne({
+            _id : userSession.sessionId,
+        });
+
+
+        const contact = await User.findOne({
+            _id: contactUserSession.userId
+        });
+
+        const conversationElement = {
+            conversation: messageList.map(message => {
+                return {
+                    type: message.type,
+                    value: message.value,
+                    status: message.status,
+                    created: message.created,
+                    userExtId: message.userId.equals(user._id) ? user.externalIdentifier : contact.externalIdentifier
+                }}),
+            sessionExtId: session.externalIdentifier,
+            contactExtId: contact.externalIdentifier,
+        }
+
+        resultArray.push(conversationElement);
+
+    }
+
+    return res.json(resultArray);
+
+}
 
 export const createMessage = async (req, res) => {
     const result = validationResult(req);

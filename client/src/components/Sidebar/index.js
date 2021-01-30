@@ -7,20 +7,11 @@ function sortByDate (a,b) {
     } else if (b.message === undefined) {
             return 1;
     } else {
-        return b.message.date - a.message.date
+        return new Date(b.message.created) - new Date(a.message.created);
     }
 }
 
 const mapStateToProps = state => {
-    const contactArray = state.conversation.conversationArray
-        .filter(element => element.conversation && element.conversation.length > 0)
-        .map(element => {
-            return {
-                ...state.contacts.contactArray.find(contact => contact.externalIdentifier === element.contactExtId),
-                message: element.conversation.slice(-1)[0]
-            }
-        }).sort(sortByDate);
-    debugger;
     return {
         selectedContact: state.contacts.selectedContact,
         contactArray: state.conversation.conversationArray
