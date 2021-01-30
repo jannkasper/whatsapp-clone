@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 // import {} from "../../actions";
 
 const mapStateToProps = state => {
-    const showPopup = !Boolean(state.user.id);
+    const showPopup = !Boolean(state.user.externalIdentifier);
     // const showPopup = false;
     const hasSelectedConversation = Boolean(state.conversation.selectedConversation);
     return {

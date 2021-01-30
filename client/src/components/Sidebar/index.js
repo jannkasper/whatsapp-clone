@@ -12,13 +12,22 @@ function sortByDate (a,b) {
 }
 
 const mapStateToProps = state => {
+    const contactArray = state.conversation.conversationArray
+        .filter(element => element.conversation && element.conversation.length > 0)
+        .map(element => {
+            return {
+                ...state.contacts.contactArray.find(contact => contact.externalIdentifier === element.contactExtId),
+                message: element.conversation.slice(-1)[0]
+            }
+        }).sort(sortByDate);
+    debugger;
     return {
         selectedContact: state.contacts.selectedContact,
         contactArray: state.conversation.conversationArray
             .filter(element => element.conversation && element.conversation.length > 0)
             .map(element => {
                 return {
-                    ...state.contacts.contactArray.find(contact => contact.username === element.contactName),
+                    ...state.contacts.contactArray.find(contact => contact.externalIdentifier === element.contactExtId),
                     message: element.conversation.slice(-1)[0]
                 }
             }).sort(sortByDate),

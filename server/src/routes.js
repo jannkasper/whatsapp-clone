@@ -1,6 +1,7 @@
 import express from "express";
 // import bodyParser from "koa-body-parser";
 import { validateUser, signup, authenticate, listUsers } from "./controllers/users.js";
+import { createMessage } from "./controllers/messages.js"
 
 const router = express.Router();
 //authentication
@@ -9,6 +10,9 @@ router.post('/authenticate', validateUser, authenticate);
 
 //users
 router.get('/users', listUsers);
+
+//messages
+router.post("/message", createMessage);
 
 export default (app) => {
     app.use("/api", router);

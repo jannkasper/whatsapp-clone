@@ -7,7 +7,7 @@ import styles from "./contact.module.scss";
 import defaultAvatar from "../../../img/avatar.svg";
 
 
-function Contact({ name, profileImage, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectedConversation }) {
+function Contact({ externalIdentifier, name, profileImage, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectedConversation }) {
 
     let baseImage = defaultAvatar;
     if (profileImage) {
@@ -28,8 +28,8 @@ function Contact({ name, profileImage, status, lastMessage, isSelected , setSele
     return (
         <div className={`${styles.contactContainer} ${isSelected ? styles.contactSelected : null }`}
              onClick={() => {
-                 setSelectedContact({contact: {name: name }});
-                 selectedConversation({contact: {name: name }})
+                 setSelectedContact({contactExtId: externalIdentifier });
+                 selectedConversation({contactExtId: externalIdentifier })
                  closeContactsNavigation();
              }}>
             <div className={styles.contactImage}>
@@ -38,12 +38,12 @@ function Contact({ name, profileImage, status, lastMessage, isSelected , setSele
             <div className={styles.contactDetails}>
                 <div className={styles.contactName}>
                     <span>{name}</span>
-                    { lastMessage ? <div>{convertDate(lastMessage.date)}</div> : null}
+                    { lastMessage ? <div>{convertDate(lastMessage.created)}</div> : null}
                 </div>
                 <div className={styles.contactLastMessage}>
                     <div className={styles.contactLastMessage_inner}>
                         <span>
-                            {lastMessage ? lastMessage.text : status}
+                            {lastMessage ? lastMessage.value : status}
                         </span>
                     </div>
                 </div>

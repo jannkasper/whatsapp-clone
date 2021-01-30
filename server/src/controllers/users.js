@@ -50,8 +50,8 @@ export const signup = async (req, res) => {
             const decodedToken = jwtDecode(token);
             const expiresAt = decodedToken.exp;
 
-            const { id, username, phoneNumber, profileImage, created } = savedUser;
-            const userInfo = { id, username, phoneNumber, profileImage, created };
+            const { externalIdentifier, username, phoneNumber, profileImage, created } = savedUser;
+            const userInfo = { externalIdentifier, username, phoneNumber, profileImage, created };
 
             return res.json({
                 message: "User created!",
@@ -62,7 +62,7 @@ export const signup = async (req, res) => {
 
 
         } else {
-            res.status(400).json({ message: "There was a problem creating your account."})
+            return res.status(400).json({ message: "There was a problem creating your account."})
         }
 
     } catch (error) {
@@ -93,8 +93,8 @@ export const authenticate = async (req, res) => {
             const decodedToken = jwtDecode(token);
             const expiresAt = decodedToken.exp;
 
-            const { id, username, phoneNumber, profileImage, created } = user;
-            const userInfo = { id, username, phoneNumber, profileImage, created };
+            const { externalIdentifier, username, phoneNumber, profileImage, created } = user;
+            const userInfo = { externalIdentifier, username, phoneNumber, profileImage, created };
 
             return res.json({
                 message: "Authentication successful!",

@@ -10,11 +10,12 @@ function ContactGroup(props) {
             <div className={`${styles.resizeView} ${props.isSidebar ? styles.sizeSidebar : styles.sizeNewChat}`}>
                 {props.chats.map(contact =>
                     <Contact
+                        externalIdentifier={contact.externalIdentifier}
                         name={contact.username}
                         profileImage={contact.profileImage}
                         status={contact.status}
                         lastMessage={contact.message}
-                        isSelected={props.selectedContact?.name === contact.username }
+                        isSelected={props.selectedContact?.externalIdentifier === contact.externalIdentifier }
                     />)}
             </div>
         </div>

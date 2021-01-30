@@ -18,7 +18,7 @@ function Conversation({ currentConversation, username }) {
                 <div ref={conversationRef} className={styles.messageGroup}>
                     <div className={styles.conversationEmptySpace}></div>
                     <div ref={messagesList}>
-                        {currentConversation?.conversation.map((message, key) => <Message key={key} text={message.text} date={message.date} isAuthor={message.author !== currentConversation.contactName}/>)}
+                        {currentConversation?.conversation.map((message, key) => <Message key={key} type={message.type} value={message.value} created={message.created} isAuthor={message.userExtId !== currentConversation.contactExtId}/>)}
                     </div>
                 </div>
             </div>

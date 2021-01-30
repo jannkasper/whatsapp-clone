@@ -5,7 +5,7 @@ import { MessageCheck, TailIn, TailOut } from "../../../icons"
 
 function Message(props) {
 
-
+    debugger;
     return (
         <div className={styles.viewResize}>
             <div className={styles.messageContainer}>
@@ -22,12 +22,12 @@ function Message(props) {
                     }
 
                     <div className={styles.message_messageText}>
-                        {props.text}
+                        {props.value}
                         <span style={{width: props.isAuthor ? "74px" : "54px", display: "inline-block"}}/>
                     </div>
                     <div className={styles.message_details}>
                         <div className={styles.message_time}>
-                            {format(props.date, "hh:mm")}
+                            {format(props.created, "hh:mm")}
                         </div>
                         {props.isAuthor ?
                         <div className={styles.message_status}>

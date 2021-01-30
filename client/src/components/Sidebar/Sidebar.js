@@ -9,7 +9,6 @@ import ContactsNavigation from "../ContactsNavigation";
 
 
 function Sidebar({ selectedContact, contactArray }) {
-    debugger;
     return (
         <div className={styles.sidebar}>
             <ContactsNavigation />

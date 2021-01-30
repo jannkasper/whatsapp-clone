@@ -11,7 +11,7 @@ function Footer({ sendMessage }) {
 
     function handleKeyDown(event) {
         if (event.key === 'Enter' && value) {
-            sendMessage({ text: value });
+            sendMessage({ type: "text", value: value });
             setValue("");
         }
     }

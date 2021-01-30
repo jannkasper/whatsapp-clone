@@ -19,6 +19,6 @@ export const selectedConversation = payload => async dispatch => {
     dispatch({ type: "SELECT_CONVERSATION", payload });
 };
 
-export const sendMessage = payload => async dispatch => {
-    dispatch({ type: "SEND_MESSAGE", payload });
-};
+// export const sendMessage = payload => async dispatch => {
+//     dispatch({ type: "SEND_MESSAGE", payload });
+// };
