@@ -15,6 +15,7 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
     }
 
     function convertDate(date) {
+        date = (typeof date === 'string' || date instanceof String) ? Date.parse(date) : date;
         if (isToday(date)) {
             return "Today";
         } else if (isYesterday(date)) {
