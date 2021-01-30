@@ -1,6 +1,6 @@
 {
   "name": "Whatsapp-clone",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "main": "src/index.js",
   "dependencies": {
@@ -28,17 +28,14 @@
     "mongoose": "^5.9.16",
     "morgan": "^1.10.0",
     "redis": "^2.8.0",
+    "shortid": "^2.2.16",
     "socket.io": "^2.0.3",
     "socket.io-redis": "^5.2.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "build": "./build.sh",
-    "dev": "nodemon src/index.js --exec babel-node",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "start": "node dist/src/index.js",
-    "lint": "eslint src"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

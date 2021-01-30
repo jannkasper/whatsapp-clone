@@ -3,11 +3,16 @@ import { connect } from "react-redux";
 import { format, differenceInDays, isToday, isYesterday } from 'date-fns';
 import { setSelectedContact, closeContactsNavigation, selectedConversation } from "../../../actions"
 
-import avatar from "../../../img/avatar.svg";
 import styles from "./contact.module.scss";
+import defaultAvatar from "../../../img/avatar.svg";
 
 
-function Contact({ name, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectedConversation }) {
+function Contact({ name, profileImage, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectedConversation }) {
+
+    let baseImage = defaultAvatar;
+    if (profileImage) {
+        baseImage = `data:${profileImage.type};base64,${profileImage.data}`
+    }
 
     function convertDate(date) {
         if (isToday(date)) {
@@ -28,7 +33,7 @@ function Contact({ name, status, lastMessage, isSelected , setSelectedContact, c
                  closeContactsNavigation();
              }}>
             <div className={styles.contactImage}>
-                <img src={avatar} alt="Avatar"/>
+                <img src={baseImage} alt="profileImage"/>
             </div>
             <div className={styles.contactDetails}>
                 <div className={styles.contactName}>

@@ -4,7 +4,7 @@ const initialState = {
     username: "",
     phoneNumber : "",
     created: "",
-    avatar : undefined,
+    profileImage : undefined,
 }
 
 const user = (state = initialState, action) => {

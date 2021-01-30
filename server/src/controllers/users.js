@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import fs from "fs";
+import shortId from 'shortid';
 import { body, validationResult } from "express-validator";
 import User from "../models/user.js"
 import { createToken, verifyPassword } from "../utils/authentication.js";
@@ -13,17 +14,24 @@ export const signup = async (req, res) => {
 
     try {
         const { phoneNumber, username, password } = req.body;
-        let { avatar } = req.files;
 
-        avatar = { ...avatar,
-            data: fs.readFileSync(avatar.path).toString("base64"),
+        let profileImage = req?.files?.profileImage;
+        if (req?.files?.profileImage) {
+            profileImage = { ...req.files.profileImage,
+                data: fs.readFileSync(req.files.profileImage.path).toString("base64"),
+            }
         }
 
+
         const userData = {
+            externalIdentifier: shortId.generate(),
+
             phoneNumber: phoneNumber,
-            username: username.toLowerCase(),
+            username: username,
             password: password,
-            avatar: avatar
+
+            profileImage: profileImage,
+            status: "Hey there! I am using WhatsApp"
         };
 
         const existingUsername = await User.findOne({
@@ -42,8 +50,8 @@ export const signup = async (req, res) => {
             const decodedToken = jwtDecode(token);
             const expiresAt = decodedToken.exp;
 
-            const { id, username, phoneNumber, avatar, created } = savedUser;
-            const userInfo = { id, username, phoneNumber, avatar, created };
+            const { id, username, phoneNumber, profileImage, created } = savedUser;
+            const userInfo = { id, username, phoneNumber, profileImage, created };
 
             return res.json({
                 message: "User created!",
@@ -85,8 +93,8 @@ export const authenticate = async (req, res) => {
             const decodedToken = jwtDecode(token);
             const expiresAt = decodedToken.exp;
 
-            const { id, username, phoneNumber, avatar, created } = user;
-            const userInfo = { id, username, phoneNumber, avatar, created };
+            const { id, username, phoneNumber, profileImage, created } = user;
+            const userInfo = { id, username, phoneNumber, profileImage, created };
 
             return res.json({
                 message: "Authentication successful!",
@@ -100,6 +108,15 @@ export const authenticate = async (req, res) => {
 
     } catch (error) {
         return res.status(400).json({ message: "There was a problem creating your account." });
+    }
+}
+
+export const listUsers = async (req, res, next) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        next(error);
     }
 }
 

@@ -1,12 +1,13 @@
 import React from "react";
 import { Formik } from "formik";
-// import * as Yup from "yup";
 import { publicFetch } from "../../util/fetcher";
+
+// import * as Yup from "yup";
 
 import logo from "../../img/logo.svg";
 import styles from "./login-form.module.scss";
 
-const LoginForm = ({ handleChangeMode, receiveAuthentication }) => {
+const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts }) => {
 
     return (
         <Formik
@@ -15,6 +16,7 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication }) => {
                 try {
                     const { data } = await publicFetch.post("authenticate", values);
                     receiveAuthentication(data);
+                    fetchContacts();
                     resetForm({})
 
                 } catch (error) {
@@ -38,7 +40,7 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication }) => {
                      handleChange, handleBlur, handleSubmit, isSubmitting
                  }) => (
                     <form onSubmit={handleSubmit} className={styles.popup_inner}>
-                        <img className={styles.image} src={logo} alt="Avatar" style={{width:"35%", height: "35%"}}/>
+                        <img className={styles.image} src={logo} alt="profileImage" style={{width:"35%", height: "35%"}}/>
                         <input
                             className={styles.userInput}
                             type="text"

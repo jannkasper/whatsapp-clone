@@ -18,7 +18,7 @@ const mapStateToProps = state => {
             .filter(element => element.conversation && element.conversation.length > 0)
             .map(element => {
                 return {
-                    ...state.contacts.contactArray.find(contact => contact.name === element.contactName),
+                    ...state.contacts.contactArray.find(contact => contact.username === element.contactName),
                     message: element.conversation.slice(-1)[0]
                 }
             }).sort(sortByDate),

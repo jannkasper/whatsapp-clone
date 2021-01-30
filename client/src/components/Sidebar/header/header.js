@@ -4,16 +4,16 @@ import defaultAvatar from "../../../img/avatar.svg"
 import styles from "./header.module.scss";
 
 
-function Header({ avatar, openContactsNavigation }) {
+function Header({ profileImage, openContactsNavigation }) {
     let baseImage = defaultAvatar;
-    if (avatar) {
-        baseImage = `data:${avatar.type};base64,${avatar.data}`
+    if (profileImage) {
+        baseImage = `data:${profileImage.type};base64,${profileImage.data}`
     }
 
     return (
         <div className={styles.headerContainer}>
             <div className={styles.userImage}>
-                <img className={styles.image} src={baseImage} alt="Avatar"/>
+                <img className={styles.image} src={baseImage} alt="profileImage"/>
             </div>
             <div className={styles.iconGroup}>
                 <div className={styles.icon}>

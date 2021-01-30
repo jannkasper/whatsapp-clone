@@ -1,18 +1,21 @@
 {
-  "name": "chat",
-  "version": "0.0.1",
-  "main": "server/src/index.js",
-  "description": "my first socket.io app",
-  "engines": {
-    "yarn": "1.x"
-  },
+  "name": "Whatsapp-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/index.js",
   "scripts": {
-    "build": "./build.sh",
-    "start": "cd server && CLIENT_DIST_DIRECTORY='../client/build' yarn start",
-    "setup": "yarn && cd client && yarn && cd ../server && yarn",
-    "dev": "concurrently 'cd client && yarn start' 'cd server && yarn dev'"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm install && node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
   },
   "devDependencies": {
-    "concurrently": "^4.1.0"
-  }
+    "concurrently": "^4.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -4,36 +4,30 @@ import { Formik } from "formik";
 import { publicFetch } from "../../util/fetcher"
 
 
-import avatar from "../../img/avatar.svg";
+import profileImage from "../../img/avatar.svg";
 import styles from "./signup-form.module.scss";
+import fetchContacts from "../../store/fetchContacts";
 
 
-const SignupForm = ({ handleChangeMode, receiveAuthentication }) => {
+const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts }) => {
 
-    const [userImage, setUserImage] = useState(avatar);
+    const [userImage, setUserImage] = useState(profileImage);
     return (
         <Formik
             initialValues={{ file: null, phoneNumber: "", username: "", password: "" }}
             onSubmit={async (values, { setStatus, resetForm}) => {
                 try {
                     let formData = new FormData();
-                    formData.append('avatar', values.file);
+                    formData.append('profileImage', values.file);
                     formData.append('phoneNumber', values.phoneNumber);
                     formData.append('username', values.username);
-
                     formData.append('password', values.password);
 
-                    const config = {
-                        headers: {
-                            'content-type': 'multipart/form-data'
-                        }
-                    };
-
                     const { data } = await publicFetch.post("signup", formData);
-                    console.log(data)
                     receiveAuthentication(data);
+                    fetchContacts();
                     resetForm({})
-                    setUserImage(avatar);
+                    setUserImage(profileImage);
 
                 } catch (error) {
                     setStatus(error.response.data.message)
@@ -77,7 +71,7 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication }) => {
                                 style={{display: "none"}}
                             />
                             <p className={styles.imageInput}>Edit</p>
-                            <img className={styles.image} src={userImage} alt="Avatar"/>
+                            <img className={styles.image} src={userImage} alt="profileImage"/>
                         </label>
                         <input
                             className={styles.userInput}

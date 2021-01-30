@@ -1,11 +1,14 @@
 import express from "express";
 // import bodyParser from "koa-body-parser";
-import { validateUser, signup, authenticate } from "./controllers/users.js";
+import { validateUser, signup, authenticate, listUsers } from "./controllers/users.js";
 
 const router = express.Router();
 //authentication
 router.post('/signup', signup);
 router.post('/authenticate', validateUser, authenticate);
+
+//users
+router.get('/users', listUsers);
 
 export default (app) => {
     app.use("/api", router);
