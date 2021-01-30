@@ -15,8 +15,8 @@ export const signup = async (req, res) => {
     try {
         const { phoneNumber, username, password } = req.body;
 
-        let profileImage = req?.files?.profileImage;
-        if (req?.files?.profileImage) {
+        let profileImage = null;
+        if (req.files && req.files.profileImage) {
             profileImage = { ...req.files.profileImage,
                 data: fs.readFileSync(req.files.profileImage.path).toString("base64"),
             }
