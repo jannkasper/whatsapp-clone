@@ -6,7 +6,6 @@ import { publicFetch } from "../../util/fetcher";
 
 import logo from "../../img/logo.svg";
 import styles from "./login-form.module.scss";
-import fetchConversations from "../../store/fetchConversations";
 
 const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
 
@@ -65,7 +64,7 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fet
                         />
                         <button className={styles.signupButton} type="submit">Log In</button>
                         <div className={styles.line}></div>
-                        <div className={styles.text}>Don't have an account? <a href="#" onClick={() => handleChangeMode()}>Sign up</a> </div>
+                        <div className={styles.text}>Don't have an account? <a href="!#" onClick={() => handleChangeMode()}>Sign up</a> </div>
                     </form>
                 )
             }

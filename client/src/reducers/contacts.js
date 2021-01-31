@@ -11,7 +11,7 @@ const contacts = (state = initialState, action) => {
         case "SET_SELECTED_CONTACT":
             return {
                 ...state,
-                selectedContact: state.contactArray.find(element => element.externalIdentifier == action.payload.contactExtId)
+                selectedContact: state.contactArray.find(element => element.externalIdentifier === action.payload.contactExtId)
             }
         case "FETCH_CONTACTS_PENDING":
             return {

@@ -6,8 +6,6 @@ import { publicFetch } from "../../util/fetcher"
 
 import profileImage from "../../img/avatar.svg";
 import styles from "./signup-form.module.scss";
-import fetchContacts from "../../store/fetchContacts";
-import fetchConversations from "../../store/fetchConversations";
 
 
 const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
@@ -107,7 +105,7 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                         />
                         <button className={styles.signupButton} type="submit">Sign up</button>
                         <div className={styles.line}></div>
-                        <div className={styles.text}>Have an account? <a href="#" onClick={() => handleChangeMode()}>Log in</a></div>
+                        <div className={styles.text}>Have an account? <a href="!#" onClick={() => handleChangeMode()}>Log in</a></div>
                     </form>
                 )
             }

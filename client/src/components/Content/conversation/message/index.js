@@ -26,7 +26,7 @@ function Message(props) {
                     </div>
                     <div className={styles.message_details}>
                         <div className={styles.message_time}>
-                            {format(props.created, "hh:mm")}
+                            {format(typeof props.created == "string" ? Date.parse(props.created) : props.created, "hh:mm")}
                         </div>
                         {props.isAuthor ?
                         <div className={styles.message_status}>

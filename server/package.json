@@ -31,7 +31,8 @@
     "shortid": "^2.2.16",
     "socket.io": "^2.0.3",
     "socket.io-redis": "^5.2.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "uuidv4": "^6.2.6"
   },
   "scripts": {
     "start": "node src/index.js",

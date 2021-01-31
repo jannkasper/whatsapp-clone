@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Smiley, Clip, Ptt, X, Gif, Sticker } from "../../icons";
+import { Smiley, Clip, Ptt, } from "../../icons";
 import styles from "./footer.module.scss";
 
 function Footer({ sendMessage }) {

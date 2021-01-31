@@ -3,7 +3,7 @@ import User from "../models/user.js";
 import Session from "../models/session.js";
 import UserSession from "../models/userSession.js";
 import Message from "../models/message.js"
-import shortId from "shortid";
+import { fromString } from 'uuidv4';
 
 export const loadMessages =  async  (req, res) => {
     const result = validationResult(req);
@@ -87,11 +87,27 @@ export const createMessage = async (req, res) => {
     try {
         const { type, value, sessionExtId, userExtId, receiverExtId, createdDate } = req.body;
 
-        if (!value || !userExtId) {
+        if (!value || !userExtId || !receiverExtId) {
             return res.status(400).json({ message: "There was a problem saving your message."})
         }
+        let newSessionExtId = null;
+        if (!sessionExtId) {
+            if (userExtId.localeCompare(receiverExtId) > 0) {
+                newSessionExtId = fromString(userExtId + receiverExtId);
+            } else {
+                newSessionExtId = fromString(receiverExtId + userExtId);
+            }
+        }
+
+        const existingSession = await Session.findOne({
+            externalIdentifier: newSessionExtId,
+        });
+
         // Start new session
-        if (!sessionExtId && receiverExtId) {
+        if (!sessionExtId && !existingSession) {
+            const newSessions = new Session({ externalIdentifier: newSessionExtId });
+            const savedSession = await newSessions.save();
+
             const sender = await User.findOne({
                 externalIdentifier: userExtId,
             });
@@ -101,16 +117,15 @@ export const createMessage = async (req, res) => {
             });
 
             if ( sender && receiver) {
-                const newSessions = new Session({ externalIdentifier: shortId.generate() });
 
                 const newSenderSession = new UserSession({
-                    externalIdentifier: shortId.generate(),
+                    externalIdentifier: fromString(sender.externalIdentifier),
                     sessionId: newSessions.id,
                     userId: sender.id,
                     created: createdDate
                 });
                 const newReceiverSession = new UserSession({
-                    externalIdentifier: shortId.generate(),
+                    externalIdentifier: fromString(receiver.externalIdentifier),
                     sessionId: newSessions.id,
                     userId: receiver.id,
                     created: createdDate
@@ -124,7 +139,6 @@ export const createMessage = async (req, res) => {
                     created: createdDate
                 });
 
-                const savedSession = await newSessions.save();
                 const savedSenderSession = await newSenderSession.save();
                 const savedReceiverSession = await newReceiverSession.save();
                 const savedMessage = await newMessage.save();
@@ -143,9 +157,9 @@ export const createMessage = async (req, res) => {
                 return res.status(400).json({ message: "There was a problem find out user data."})
 
             }
-        } else if (sessionExtId) {
+        } else if (sessionExtId || existingSession) {
             const oldSession = await Session.findOne({
-                externalIdentifier: sessionExtId
+                externalIdentifier: sessionExtId || existingSession.externalIdentifier
             });
 
             if (!oldSession) {

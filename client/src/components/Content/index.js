@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./header";
 import Conversation from "./conversation";
 import Footer from "./footer";
