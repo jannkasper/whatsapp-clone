@@ -15,35 +15,21 @@ export const signup = async (req, res) => {
     try {
         const { phoneNumber, username, password } = req.body;
 
-        let profileImage = null;
-        if (req.files && req.files.profileImage) {
-            profileImage = { ...req.files.profileImage,
-                data: fs.readFileSync(req.files.profileImage.path).toString("base64"),
-            }
-        }
-
-
-        const userData = {
-            externalIdentifier: shortId.generate(),
-
-            phoneNumber: phoneNumber,
-            username: username,
-            password: password,
-
-            profileImage: profileImage,
-            status: "Hey there! I am using WhatsApp"
-        };
-
-        const existingUsername = await User.findOne({
-            username: userData.username
-        })
+        const existingUsername = await User.findOne({ username })
 
         if (existingUsername) {
             return res.status(400).json({ message: "Username already exists." });
         };
 
-        const newUser = new User(userData);
-        const savedUser = await newUser.save();
+        const userData = {
+            externalIdentifier: shortId.generate(),
+            phoneNumber: phoneNumber,
+            username: username,
+            password: password,
+            ...(req.files && req.files.profileImage) && { profileImage : { ...req.files.profileImage, data: fs.readFileSync(req.files.profileImage.path).toString("base64") }},
+        };
+
+        const savedUser = await new User(userData).save();
 
         if (savedUser) {
             const token = createToken(savedUser);
@@ -59,8 +45,6 @@ export const signup = async (req, res) => {
                 userInfo,
                 expiresAt
             });
-
-
         } else {
             return res.status(400).json({ message: "There was a problem creating your account."})
         }
@@ -79,6 +63,7 @@ export const authenticate = async (req, res) => {
     
     try {
         const { username, password } = req.body;
+
         const user = await User.findOne({
             username: username.toLowerCase()
         });
@@ -86,6 +71,7 @@ export const authenticate = async (req, res) => {
         if (!user) {
             return res.status(403).json({ message: "Wrong username or password."})
         }
+
         const passwordValid = await verifyPassword(password, user.password);
 
         if (passwordValid) {

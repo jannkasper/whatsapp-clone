@@ -1,18 +1,17 @@
 import express from "express";
-// import bodyParser from "koa-body-parser";
 import { validateUser, signup, authenticate, listUsers } from "./controllers/users.js";
-import { createMessage, loadMessages } from "./controllers/messages.js"
+import { validateMessage, createMessage, loadMessages } from "./controllers/messages.js"
 
 const router = express.Router();
 //authentication
-router.post('/signup', signup);
+router.post('/signup', validateUser, signup);
 router.post('/authenticate', validateUser, authenticate);
 
 //users
 router.get('/users', listUsers);
 
 //messages
-router.post("/message", createMessage);
+router.post("/message", validateMessage, createMessage);
 router.get("/messages/:userExtId", loadMessages);
 
 export default (app) => {

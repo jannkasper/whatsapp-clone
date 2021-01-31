@@ -7,7 +7,7 @@ function sortByDate (a,b) {
     } else if (b.message === undefined) {
             return 1;
     } else {
-        return new Date(b.message.created.toString()) - new Date(a.message.created.toString());
+        return b.message.created - a.message.created;
     }
 }
 

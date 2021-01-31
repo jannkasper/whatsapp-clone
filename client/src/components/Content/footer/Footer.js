@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Smiley, Clip, Ptt, } from "../../icons";
 import styles from "./footer.module.scss";
 
-function Footer({ sendMessage }) {
+function Footer({ createMessage }) {
     const [value, setValue] = useState("");
 
     function handleChange(event) {
@@ -11,7 +11,7 @@ function Footer({ sendMessage }) {
 
     async function handleKeyDown(event) {
         if (event.key === 'Enter' && value) {
-            await sendMessage({ type: "text", value: value });
+            await createMessage({ type: "text", value: value });
             setValue("");
         }
     }

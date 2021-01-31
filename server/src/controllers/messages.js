@@ -1,13 +1,12 @@
 import { body, validationResult } from "express-validator";
+import { createSessionExtIdentifier, createNewSessions } from "../utils/authentication.js"
 import User from "../models/user.js";
 import Session from "../models/session.js";
 import UserSession from "../models/userSession.js";
 import Message from "../models/message.js"
-import { fromString } from 'uuidv4';
 
 export const loadMessages =  async  (req, res) => {
     const result = validationResult(req);
-
     if (!result.isEmpty()) {
         const errors = result.array({onlyFirstError: true });
         return res.status(422).json({ errors });
@@ -16,7 +15,7 @@ export const loadMessages =  async  (req, res) => {
     const userExtId = req.params.userExtId;
 
     if (!userExtId) {
-        return res.status(400).json({ message: "There was a problem retrieve conversations."})
+        return res.status(400).json({ message: "Missed userExtId in request."})
     }
 
     const user = await User.findOne({
@@ -24,16 +23,12 @@ export const loadMessages =  async  (req, res) => {
     });
 
     if (!user) {
-        return res.status(400).json({ message: "There was a problem retrieve conversations."})
+        return res.status(400).json({ message: "There was a problem find user in database."})
     }
 
     const userSessionList = await UserSession.find({
         userId : user.id,
     });
-
-    if (!userSessionList) {
-        return res.status(400).json({ message: "There was a problem retrieve conversations."})
-    }
 
     const resultArray = [];
     for(const userSession of userSessionList) {
@@ -50,7 +45,6 @@ export const loadMessages =  async  (req, res) => {
             _id : userSession.sessionId,
         });
 
-
         const contact = await User.findOne({
             _id: contactUserSession.userId
         });
@@ -61,7 +55,7 @@ export const loadMessages =  async  (req, res) => {
                     type: message.type,
                     value: message.value,
                     status: message.status,
-                    created: message.created,
+                    created: Date.parse(message.created),
                     userExtId: message.userId.equals(user._id) ? user.externalIdentifier : contact.externalIdentifier
                 }}),
             sessionExtId: session.externalIdentifier,
@@ -78,127 +72,56 @@ export const loadMessages =  async  (req, res) => {
 
 export const createMessage = async (req, res) => {
     const result = validationResult(req);
-
     if (!result.isEmpty()) {
         const errors = result.array({onlyFirstError: true });
         return res.status(422).json({ errors });
     }
 
     try {
-        const { type, value, sessionExtId, userExtId, receiverExtId, createdDate } = req.body;
+        const { type, value, sessionExtId, userExtId, receiverExtId, created } = req.body;
 
-        if (!value || !userExtId || !receiverExtId) {
-            return res.status(400).json({ message: "There was a problem saving your message."})
-        }
-        let newSessionExtId = null;
-        if (!sessionExtId) {
-            if (userExtId.localeCompare(receiverExtId) > 0) {
-                newSessionExtId = fromString(userExtId + receiverExtId);
-            } else {
-                newSessionExtId = fromString(receiverExtId + userExtId);
-            }
+        if (!type || !value || !userExtId || !receiverExtId) {
+            return res.status(400).json({ message: "Missed required values in request."})
         }
 
-        const existingSession = await Session.findOne({
-            externalIdentifier: newSessionExtId,
+        let existingSession = await Session.findOne({
+            externalIdentifier: sessionExtId || createSessionExtIdentifier(userExtId, receiverExtId),
         });
 
         // Start new session
-        if (!sessionExtId && !existingSession) {
-            const newSessions = new Session({ externalIdentifier: newSessionExtId });
-            const savedSession = await newSessions.save();
-
-            const sender = await User.findOne({
-                externalIdentifier: userExtId,
-            });
-
-            const receiver = await User.findOne({
-                externalIdentifier: receiverExtId,
-            });
-
-            if ( sender && receiver) {
-
-                const newSenderSession = new UserSession({
-                    externalIdentifier: fromString(sender.externalIdentifier),
-                    sessionId: newSessions.id,
-                    userId: sender.id,
-                    created: createdDate
-                });
-                const newReceiverSession = new UserSession({
-                    externalIdentifier: fromString(receiver.externalIdentifier),
-                    sessionId: newSessions.id,
-                    userId: receiver.id,
-                    created: createdDate
-                });
-
-                const newMessage = new Message({
-                    type: type,
-                    value: value,
-                    sessionId: newSessions.id,
-                    userId: sender.id,
-                    created: createdDate
-                });
-
-                const savedSenderSession = await newSenderSession.save();
-                const savedReceiverSession = await newReceiverSession.save();
-                const savedMessage = await newMessage.save();
-
-
-                return res.json({
-                    type: savedMessage.type,
-                    value: savedMessage.value,
-                    sessionExtId: savedSession.externalIdentifier,
-                    userExtId: sender.externalIdentifier,
-                    status: savedMessage.status,
-                    created: savedMessage.created,
-                });
-
-            } else {
-                return res.status(400).json({ message: "There was a problem find out user data."})
-
+        if (!existingSession) {
+            existingSession = await createNewSessions(userExtId, receiverExtId);
+            if (!existingSession) {
+                return res.status(400).json({ message: "Problem creating new session"})
             }
-        } else if (sessionExtId || existingSession) {
-            const oldSession = await Session.findOne({
-                externalIdentifier: sessionExtId || existingSession.externalIdentifier
-            });
-
-            if (!oldSession) {
-                return res.status(400).json({ message: "There was a problem find out session data."})
-
-            }
-
-            const sender = await User.findOne({
-                externalIdentifier: userExtId
-            });
-
-            if (!sender) {
-                return res.status(400).json({ message: "There was a problem find out user data."})
-
-            }
-
-            const newMessage = new Message({
-                type: type,
-                value: value,
-                sessionId: oldSession.id,
-                userId: sender.id,
-                created: createdDate
-            });
-
-            const savedMessage = await newMessage.save();
-
-            return res.json({
-                type: savedMessage.type,
-                value: savedMessage.value,
-                sessionExtId: oldSession.externalIdentifier,
-                userExtId: sender.externalIdentifier,
-                status: savedMessage.status,
-                created: savedMessage.created,
-            });
         }
 
-        return res.status(400).json({ message: "Missing data for saving message." });
+        const sender = await User.findOne({
+            externalIdentifier: userExtId,
+        }, {function (err, result) {
+            if (err || !result)
+                return res.status(400).json({ message: "There was a problem find user in database."})
+            }});
 
+        const savedMessage = await new Message({
+            type: type,
+            value: value,
+            sessionId: existingSession.id,
+            userId: sender.id,
+            created: created
+        }).save();
+
+        return res.json({
+            type: savedMessage.type,
+            value: savedMessage.value,
+            sessionExtId: existingSession.externalIdentifier,
+            userExtId: sender.externalIdentifier,
+            status: savedMessage.status,
+            created: Date.parse(savedMessage.created),
+        });
     } catch (error) {
         return res.status(400).json({ message: "There was a problem save your message." });
     }
 }
+
+export const validateMessage  = [];

@@ -7,7 +7,7 @@ function fetchContacts() {
         publicFetch.get("users")
             .then(res => {
                 if(res.error) {
-                    throw(res.error);
+                    dispatch(fetchContactsError(res.error));
                 }
                 dispatch(fetchContactsSuccess({contacts: res.data }));
                 return;

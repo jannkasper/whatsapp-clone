@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { format, differenceInDays, isToday, isYesterday } from 'date-fns';
-import { setSelectedContact, closeContactsNavigation, selectedConversation } from "../../../actions"
+import { setSelectedContact, closeContactsNavigation, selectConversation } from "../../../actions"
 
 import styles from "./contact.module.scss";
 import defaultAvatar from "../../../img/avatar.svg";
 
 
-function Contact({ externalIdentifier, name, profileImage, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectedConversation }) {
+function Contact({ externalIdentifier, name, profileImage, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectConversation }) {
 
     let baseImage = defaultAvatar;
     if (profileImage) {
@@ -30,7 +30,7 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
         <div className={`${styles.contactContainer} ${isSelected ? styles.contactSelected : null }`}
              onClick={() => {
                  setSelectedContact({contactExtId: externalIdentifier });
-                 selectedConversation({contactExtId: externalIdentifier })
+                 selectConversation({contactExtId: externalIdentifier })
                  closeContactsNavigation();
              }}>
             <div className={styles.contactImage}>
@@ -52,6 +52,6 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
         </div>
     )
 }
-const mapDispatchToProps = { setSelectedContact, closeContactsNavigation, selectedConversation };
+const mapDispatchToProps = { setSelectedContact, closeContactsNavigation, selectConversation };
 
 export default connect(null, mapDispatchToProps)(Contact);

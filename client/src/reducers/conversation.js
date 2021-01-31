@@ -11,6 +11,7 @@ const conversation = (state = initialState, action) => {
         case "SELECT_CONVERSATION":
             let selectedConversation = state.conversationArray.find(conversation => conversation.contactExtId === action.payload.contactExtId);
             if (!selectedConversation) {
+                // start new conversation
                 selectedConversation = { contactExtId: action.payload.contactExtId, conversation: [] };
             }
             return {
@@ -18,24 +19,17 @@ const conversation = (state = initialState, action) => {
                 conversationArray: state.conversationArray.includes(selectedConversation) ? state.conversationArray : [...state.conversationArray, selectedConversation],
                 selectedConversation: selectedConversation
             }
-        case "SEND_MESSAGE":
-            const newMessage = {
-                type: action.payload.type,
-                value: action.payload.value,
-                status: action.payload.status,
-                created: action.payload.created,
-                userExtId: action.payload.userExtId,
-            }
+        case "CREATE_MESSAGE":
             const updateConversation = {
                 ...state.selectedConversation,
-                conversation: [...state.selectedConversation.conversation, newMessage]
+                conversation: [...state.selectedConversation.conversation, action.payload.message]
             }
             return {
                 ...state,
                 conversationArray: [...state.conversationArray.map(element => element.contactExtId === updateConversation.contactExtId ? updateConversation : element)],
                 selectedConversation: updateConversation
             }
-        case "SET_CURRENT_SESSION_EXT_ID":
+        case "ENTER_SESSION_IDENTIFIER":
             const updateConvWithSessionExtId = {
                 ...state.selectedConversation,
                 sessionExtId: action.payload.sessionExtId

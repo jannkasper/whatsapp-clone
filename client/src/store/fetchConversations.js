@@ -1,9 +1,4 @@
-import {
-    fetchConversationsPending,
-    fetchConversationsSuccess,
-    fetchConversationsError,
-    fetchContactsSuccess
-} from "../actions"
+import { fetchConversationsPending, fetchConversationsSuccess, fetchConversationsError } from "../actions"
 import { publicFetch } from "../util/fetcher";
 
 function fetchConversations(userExtId) {
@@ -12,7 +7,7 @@ function fetchConversations(userExtId) {
         publicFetch.get(`messages/${userExtId}`)
             .then(res => {
                 if(res.error) {
-                    throw(res.error);
+                    dispatch(fetchConversationsError(res.error));
                 }
                 dispatch(fetchConversationsSuccess({conversations: res.data }));
                 return;

@@ -1,13 +1,13 @@
 import Footer from "./Footer";
 import { connect } from "react-redux";
-import { sendMessage } from "../../../actions";
+import { createMessage } from "../../../actions";
 
 const mapStateToProps = (state) => {
     return {}
 }
 
 const mapDispatchToProps = {
-    sendMessage
+    createMessage
 }
 
 
