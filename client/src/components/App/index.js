@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 
 const mapStateToProps = state => {
     const showPopup = !Boolean(state.user.externalIdentifier);
-    // const showPopup = false;
+    const userExtId = state.user.externalIdentifier;
     const hasSelectedConversation = Boolean(state.conversation.selectedConversation);
     return {
         showPopup,
-        hasSelectedConversation
+        hasSelectedConversation,
+        userExtId
     }
 }
 

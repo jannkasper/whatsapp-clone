@@ -1,5 +1,6 @@
 import { publicFetch } from "../util/fetcher";
 import { prepare as prepareMessage } from "../util/message"
+import { getSocket } from "../util/socket";
 
 export const fetchConversationsPending = () => ({ type: "FETCH_CONVERSATIONS_PENDING" });
 
@@ -21,10 +22,12 @@ export const createMessage = payload => async (dispatch, getState) => {
 
     dispatch({ type: "CREATE_MESSAGE", payload: { message: message.original }});
 
-    publicFetch.post("message", message.toSend)
-        .then(response => {
-            if (!state.conversation.selectedConversation.sessionExtId) {
-                dispatch({ type: "ENTER_SESSION_IDENTIFIER", payload: {sessionExtId: response.data.sessionExtId }});
-            }
-        });
+    getSocket().emit("MESSAGE", message.toSend);
+
+    // publicFetch.post("message", message.toSend)
+    //     .then(response => {
+    //         if (!state.conversation.selectedConversation.sessionExtId) {
+    //             dispatch({ type: "ENTER_SESSION_IDENTIFIER", payload: {sessionExtId: response.data.sessionExtId }});
+    //         }
+    //     });
 }
