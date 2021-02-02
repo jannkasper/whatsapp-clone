@@ -29,6 +29,32 @@ const conversation = (state = initialState, action) => {
                 conversationArray: [...state.conversationArray.map(element => element.contactExtId === updateConversation.contactExtId ? updateConversation : element)],
                 selectedConversation: updateConversation
             }
+        case "RECEIVE_MESSAGE":
+            const { message } = action.payload;
+            let updateSelectedConversation = null;
+            debugger;
+            if ( state.selectedConversation && state.selectedConversation.contactExtId === message.userExtId ) {
+                updateSelectedConversation = {...state.selectedConversation, conversation: [...state.selectedConversation.conversation, message ]}
+            } else {
+                updateSelectedConversation = state.selectedConversation;
+            }
+
+            let updateConversationArray = null;
+            const findConversation = state.conversationArray.find(conversation => conversation.contactExtId === message.userExtId);
+            if (findConversation) {
+                updateConversationArray = [...state.conversationArray
+                    .map(element => element.contactExtId === message.userExtId
+                        ? {...element, conversation: [...element.conversation, message ]} : element)]
+            } else {
+                updateConversationArray = [...state.conversationArray, {contactExtId: message.userExtId, sessionExtId: message.sessionExtId, conversation: [message]}]
+            }
+
+            return {
+                ...state,
+                selectedConversation: updateSelectedConversation,
+                conversationArray: updateConversationArray
+            }
+            debugger;
         case "ENTER_SESSION_IDENTIFIER":
             const updateConvWithSessionExtId = {
                 ...state.selectedConversation,

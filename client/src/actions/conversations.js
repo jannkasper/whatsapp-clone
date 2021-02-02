@@ -16,10 +16,15 @@ export const selectConversation = payload => async dispatch => {
     dispatch({ type: "SELECT_CONVERSATION", payload });
 };
 
+export const receiveMessage = payload => async dispatch => {
+    debugger;
+    dispatch({ type: "RECEIVE_MESSAGE", payload });
+};
+
 export const createMessage = payload => async (dispatch, getState) => {
     const state = getState();
     const message = await prepareMessage(payload, state);
-
+    debugger;
     dispatch({ type: "CREATE_MESSAGE", payload: { message: message.original }});
 
     getSocket().emit("MESSAGE", message.toSend);

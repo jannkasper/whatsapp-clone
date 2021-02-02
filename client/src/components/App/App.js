@@ -7,7 +7,7 @@ import {connect as connectSocket} from "../../util/socket";
 
 import './App.css';
 
-function App({ showPopup, hasSelectedConversation, userExtId }) {
+function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage }) {
 
     useEffect(() => {
         if (userExtId) {
@@ -18,11 +18,10 @@ function App({ showPopup, hasSelectedConversation, userExtId }) {
 
     function handleSocket (socket) {
         socket.on('disconnect', () => {
-            debugger;
         });
 
         socket.on("MESSAGE", payload => {
-            debugger;
+            receiveMessage(payload);
         })
     }
 
