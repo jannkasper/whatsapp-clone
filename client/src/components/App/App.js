@@ -21,6 +21,7 @@ function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage }) 
         });
 
         socket.on("MESSAGE", payload => {
+            console.log("MESSAGE from: ", payload.userExtId)
             receiveMessage(payload);
         })
     }

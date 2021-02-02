@@ -5,7 +5,7 @@ import generateUrl from "../api/config";
 let socket;
 
 export const connect = userExtId => {
-
+    console.log(generateUrl());
     socket = socketIO(generateUrl(), {
         query: { userExtId },
         forceNew: true

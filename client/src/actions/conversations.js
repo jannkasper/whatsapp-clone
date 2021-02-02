@@ -27,6 +27,7 @@ export const createMessage = payload => async (dispatch, getState) => {
     debugger;
     dispatch({ type: "CREATE_MESSAGE", payload: { message: message.original }});
 
+    console.log("Emit MESSAGE: ", message.toSend.userExtId)
     getSocket().emit("MESSAGE", message.toSend);
 
     // publicFetch.post("message", message.toSend)
