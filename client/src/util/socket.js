@@ -1,12 +1,13 @@
 import React from "react";
 import socketIO from "socket.io-client";
-import generateUrl from "../api/config";
+
+const baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3001" : `https://${process.env.REACT_APP_SITE_NAME}`;
 
 let socket;
 
 export const connect = userExtId => {
-    console.log(generateUrl());
-    socket = socketIO(generateUrl(), {
+    console.log(baseURL);
+    socket = socketIO(baseURL, {
         query: { userExtId },
         forceNew: true
     });
