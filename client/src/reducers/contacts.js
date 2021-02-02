@@ -30,6 +30,11 @@ const contacts = (state = initialState, action) => {
                 pending: false,
                 error: action.payload.error,
             }
+        case "RECEIVE_CONTACT":
+            return  {
+                ...state,
+                contactArray: [...state.contactArray, action.payload.contact]
+            }
         default:
             return state;
     }

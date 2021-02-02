@@ -32,7 +32,6 @@ export default class Socket {
     async handleSocket (socket) {
 
         socket.on("MESSAGE", async payload => {
-            console.log("MESSAGE TRIGGER");
             const receiverExtId = payload.receiverExtId;
 
             const message = {

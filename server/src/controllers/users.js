@@ -4,6 +4,7 @@ import shortId from 'shortid';
 import { body, validationResult } from "express-validator";
 import User from "../models/user.js"
 import { createToken, verifyPassword } from "../utils/authentication.js";
+import { getIO } from "../index.js";
 
 export const signup = async (req, res) => {
     const result = validationResult(req);
@@ -35,6 +36,8 @@ export const signup = async (req, res) => {
             const token = createToken(savedUser);
             const decodedToken = jwtDecode(token);
             const expiresAt = decodedToken.exp;
+
+            getIO().emit("USER_ENTER", { contact: savedUser });
 
             const { externalIdentifier, username, phoneNumber, profileImage, created } = savedUser;
             const userInfo = { externalIdentifier, username, phoneNumber, profileImage, created };

@@ -1,6 +1,6 @@
 import App from "./App";
 import { connect } from "react-redux";
-import { receiveMessage } from "../../actions";
+import { receiveMessage, receiveNewContact } from "../../actions";
 
 const mapStateToProps = state => {
     const showPopup = !Boolean(state.user.externalIdentifier);
@@ -14,7 +14,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    receiveMessage
+    receiveMessage,
+    receiveNewContact
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

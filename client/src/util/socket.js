@@ -6,7 +6,6 @@ const baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3001"
 let socket;
 
 export const connect = userExtId => {
-    console.log(baseURL);
     socket = socketIO(baseURL, {
         query: { userExtId },
         forceNew: true

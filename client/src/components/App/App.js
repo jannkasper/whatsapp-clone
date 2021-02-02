@@ -7,7 +7,7 @@ import {connect as connectSocket} from "../../util/socket";
 
 import './App.css';
 
-function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage }) {
+function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage, receiveNewContact }) {
 
     useEffect(() => {
         if (userExtId) {
@@ -21,8 +21,11 @@ function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage }) 
         });
 
         socket.on("MESSAGE", payload => {
-            console.log("MESSAGE from: ", payload.userExtId)
             receiveMessage(payload);
+        })
+
+        socket.on("USER_ENTER", payload => {
+            receiveNewContact(payload);
         })
     }
 

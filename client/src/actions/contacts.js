@@ -7,3 +7,7 @@ export const fetchContactsSuccess = payload => async dispatch => {
 export const fetchContactsError = payload => async dispatch => {
     dispatch({ type: "FETCH_CONTACTS_ERROR", payload });
 };
+
+export const receiveNewContact = payload => async dispatch => {
+    dispatch({ type: "RECEIVE_CONTACT", payload });
+};
