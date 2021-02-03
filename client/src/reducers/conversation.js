@@ -54,7 +54,6 @@ const conversation = (state = initialState, action) => {
                 selectedConversation: updateSelectedConversation,
                 conversationArray: updateConversationArray
             }
-            debugger;
         case "ENTER_SESSION_IDENTIFIER":
             const updateConvWithSessionExtId = {
                 ...state.selectedConversation,

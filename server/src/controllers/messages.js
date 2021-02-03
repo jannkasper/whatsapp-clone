@@ -4,6 +4,8 @@ import User from "../models/user.js";
 import Session from "../models/session.js";
 import UserSession from "../models/userSession.js";
 import Message from "../models/message.js"
+import {determineValue} from "../utils/message.js";
+import _ from "lodash";
 
 export const loadMessages =  async  (req, res) => {
     const result = validationResult(req);
@@ -78,7 +80,8 @@ export const createMessage = async (req, res) => {
     }
 
     try {
-        const { type, value, sessionExtId, userExtId, receiverExtId, created } = req.body;
+        const { type, sessionExtId, userExtId, receiverExtId, created } = req.body;
+        const { value } = (req.files.value && req.files) || req.body;
 
         if (!type || !value || !userExtId || !receiverExtId) {
             return res.status(400).json({ message: "Missed required values in request."})
@@ -105,7 +108,7 @@ export const createMessage = async (req, res) => {
 
         const savedMessage = await new Message({
             type: type,
-            value: value,
+            value: await determineValue(type, value),
             sessionId: existingSession.id,
             userId: sender.id,
             created: created

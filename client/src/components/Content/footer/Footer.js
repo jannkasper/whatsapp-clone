@@ -1,9 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Smiley, Clip, Ptt, } from "../../icons";
 import styles from "./footer.module.scss";
 
 function Footer({ createMessage }) {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState(null);
+    const [fileSelector, setFileSelector] = useState(null);
+
+    function buildFileSelector(){
+        const fileSelector = document.createElement('input');
+        fileSelector.setAttribute('type', 'file');
+        fileSelector.setAttribute('accept', 'image/jpeg, image/png');
+        // fileSelector.setAttribute('multiple', 'multiple');
+        fileSelector.onchange = handleSendFile;
+        return fileSelector;
+    }
+
+    useEffect(() => {
+        if (fileSelector == null) {
+            setFileSelector(buildFileSelector());
+        }
+    })
+
+    async function handleSendFile(event) {
+        // await setValue(event.target.files[0]);
+        // const value = await getValue();
+        createMessage({ type: "image", value: event.target.files[0] });
+        setValue(null);
+    }
 
     function handleChange(event) {
         setValue(event.target.value);
@@ -12,8 +35,12 @@ function Footer({ createMessage }) {
     async function handleKeyDown(event) {
         if (event.key === 'Enter' && value) {
             await createMessage({ type: "text", value: value });
-            setValue("");
+            setValue(null);
         }
+    }
+    async function handleFileSelect(event) {
+        event.preventDefault();
+        fileSelector.click();
     }
 
     return (
@@ -32,7 +59,7 @@ function Footer({ createMessage }) {
                 {/*<div className={styles.icon}>*/}
                 {/*    <Sticker />*/}
                 {/*</div>*/}
-                <div className={styles.icon}>
+                <div className={styles.icon} onClick={event => handleFileSelect(event)}>
                     <Clip />
                 </div>
             </div>

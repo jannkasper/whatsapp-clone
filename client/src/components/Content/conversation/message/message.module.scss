@@ -37,7 +37,7 @@
   flex: 1;
   border-radius: 7.5px;
 
-  padding: 6px 7px 8px 9px;
+  //padding: 6px 7px 8px 9px;
 }
 .sendMessage {
   margin-left: auto;
@@ -55,6 +55,7 @@
 
 .message_messageText {
   position: relative;
+  padding: 6px 7px 8px 9px;
   overflow-wrap: break-word;
   white-space: pre-wrap;
   font-size: 14.2px;
@@ -66,10 +67,37 @@
   display: block;
 }
 
-.message_details {
+.message_messageImage {
+  padding: 5px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  img {
+    border-radius: 7.5px;
+    width: 330px;
+    max-height: 330px;
+  }
+
+  .gradient {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    border-radius: 7.5px;
+    z-index: 2;
+    background: linear-gradient(0deg, rgba(50, 50, 50, 0.6), rgba(246, 244, 244, 0));
+
+  }
+}
+
+.message_details {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
   float: right;
   margin: -10px 0 -5px 4px;
+  z-index: 15;
 
   .message_time {
     display: inline-block;
@@ -79,7 +107,7 @@
     line-height: 15px;
     white-space: nowrap;
 
-    color: #f1f1f2a1;
+    color: rgba(241, 241, 242, 0.9);
   }
 
   .message_status {

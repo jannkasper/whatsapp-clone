@@ -5,6 +5,7 @@ import { setSelectedContact, closeContactsNavigation, selectConversation } from 
 
 import styles from "./contact.module.scss";
 import defaultAvatar from "../../../img/avatar.svg";
+import { Photo } from "../../icons";
 
 
 function Contact({ externalIdentifier, name, profileImage, status, lastMessage, isSelected , setSelectedContact, closeContactsNavigation, selectConversation }) {
@@ -26,6 +27,15 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
             format(date, "dd/MM/yyyy");
         }
     }
+
+    function determineMessageContent(message) {
+        switch(message.type) {
+            case "image":
+                return <><Photo /> Photo</>;
+            default:
+                return message.value;
+        }
+    }
     return (
         <div className={`${styles.contactContainer} ${isSelected ? styles.contactSelected : null }`}
              onClick={() => {
@@ -43,8 +53,8 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
                 </div>
                 <div className={styles.contactLastMessage}>
                     <div className={styles.contactLastMessage_inner}>
-                        <span>
-                            {lastMessage ? lastMessage.value : status}
+                        <span className={styles.span}>
+                            {lastMessage ? determineMessageContent(lastMessage) : status}
                         </span>
                     </div>
                 </div>

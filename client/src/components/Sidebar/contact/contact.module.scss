@@ -96,6 +96,11 @@
     width: 100px;
     overflow: hidden;
 
+    svg {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
     span {
       flex: 1;
       overflow: hidden;

@@ -2,7 +2,17 @@ import Session from "../models/session.js";
 import { createNewSessions, createSessionExtIdentifier } from "./authentication.js";
 import User from "../models/user.js";
 import Message from "../models/message.js";
+import fs from "fs";
 
+export const determineValue = async (type, value) => {
+    switch (type) {
+        case "image":
+            return { ...value, data: fs.readFileSync(value.path).toString("base64") }
+        case "text":
+        default:
+            return value;
+    }
+}
 
 export const createMessage = async (message) => {
     try {
