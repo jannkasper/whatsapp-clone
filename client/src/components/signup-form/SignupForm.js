@@ -105,7 +105,7 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                         />
                         <button className={styles.signupButton} type="submit">Sign up</button>
                         <div className={styles.line}></div>
-                        <div className={styles.text}>Have an account? <a href="!#" onClick={() => handleChangeMode()}>Log in</a></div>
+                        <div className={styles.text}>Have an account? <a href="!#" onClick={(e) => handleChangeMode(e)}>Log in</a></div>
                     </form>
                 )
             }

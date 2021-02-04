@@ -7,7 +7,8 @@ import styles from "./popup.module.scss";
 function Popup({ showPopup }) {
     const [isLogin, setIsLogin] = useState(true);
 
-    const handleChangeMode = () => {
+    const handleChangeMode = (event) => {
+        event.preventDefault();
         setIsLogin(!isLogin);
     }
 

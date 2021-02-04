@@ -67,11 +67,13 @@
   height: 100px;
   width: 100px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .imageInput {
   position: absolute;
   height: 100px;
+  line-height: 100px;
   width: 100px;
   text-align: center;
   border-radius: 50%;
