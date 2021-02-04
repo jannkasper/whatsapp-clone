@@ -6,8 +6,9 @@ import Popup from "../Popup";
 import {connect as connectSocket} from "../../util/socket";
 
 import './App.css';
+import ProgressBar from "../ProgressBar";
 
-function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage, receiveNewContact }) {
+function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage, receiveNewContact, isLoading, completed }) {
 
     useEffect(() => {
         if (userExtId) {
@@ -31,14 +32,21 @@ function App({ showPopup, hasSelectedConversation, userExtId, receiveMessage, re
 
     return (
         <div className="App">
-            <div className="inner" style={showPopup ? { filter: "blur(4px)" } : null }>
-                <Sidebar />
-                {
-                    hasSelectedConversation ?
-                        <Content /> : <Home />
-                }
-            </div>
-            <Popup showPopup={showPopup} />
+            {isLoading ? <ProgressBar completed={completed} />
+            : (
+                <>
+                    <div className={`inner ${showPopup ? "blur" : "zoomOut"}`} >
+                        <Sidebar/>
+                        {
+                            hasSelectedConversation ?
+                                <Content/> : <Home showPopup={showPopup}/>
+                        }
+                    </div>
+                    <Popup showPopup={showPopup}/>
+                </>
+            )}
+
+
         </div>
     );
 }

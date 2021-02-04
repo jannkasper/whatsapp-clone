@@ -36,6 +36,45 @@
   height: 280px;
 }
 
+.zoomInImage {
+  opacity: 0;
+  animation-name: zoomInImage;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+  //animation: zoomInImage 300ms ease-in;
+}
+
+@keyframes zoomInImage {
+  0% { opacity: 0; transform:scale(0.1)}
+  100% { opacity: 1; transform:scale(1)}
+}
+
+.textMove {
+  opacity: 0;
+  animation-name: textMove;
+  animation-duration: 150ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 0.4s;
+  //animation: textMove 300ms ease-in 0.5s;
+}
+
+@keyframes textMove {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
 @media (min-width: 900px) {
   .mainContainer {
     flex: 65%;

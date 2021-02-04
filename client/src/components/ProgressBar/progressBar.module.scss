@@ -1,0 +1,41 @@
+.progressContainer {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  div {
+    position: relative;
+    text-align:center;
+  }
+}
+
+.containerStyles {
+  height: 3px;
+  width: 400px;
+  background-color: #a6a8aa;
+  //border-radius: 50px;
+  margin: 50px;
+}
+
+.labelStyles {
+  padding: 5%;
+  color: white;
+  font-weight: bold;
+}
+
+.fillerStyles {
+  height: 100%;
+  //width: `${completed}%`;
+  width: 0;
+  background-color: #056162;
+  border-radius: inherit;
+  text-align: right;
+  //transition: width 1s ease-in-out;
+  animation: progressBar 1.5s ease-in-out;
+  animation-fill-mode:both;
+}
+@keyframes progressBar {
+  0% { width: 0; }
+  100% { width: 100%; }
+}

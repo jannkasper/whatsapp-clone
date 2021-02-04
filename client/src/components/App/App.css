@@ -26,6 +26,18 @@
   /*top: 50px;*/
 }
 
+.blur {
+  filter: blur(4px);
+}
+
+.zoomOut {
+  animation: zoomInOutPage 200ms ease-in;
+}
+
+@keyframes zoomInOutPage {
+  0% { opacity: 0; transform:scale(1.5)}
+  100% { opacity: 1; transform:scale(1)}
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

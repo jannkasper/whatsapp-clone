@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "./home.module.scss";
 
-function Index() {
-
+function Index({ showPopup }) {
 
     return (
         <div className={styles.mainContainer}>
 
             <div className={styles.homeContainer}>
                 <div className={styles.resizeContainer}>
-                    <div className={styles.homeImage}></div>
-                        <h1 className={styles.homeTextHeader}>Keep your phone connected</h1>
-                        <div className={styles.homeTextDescription}>WhatsApp connects to your phone to sync messages. To reduce data usage, connect your phone to Wi-Fi.</div>
-                        <div className={styles.homeLink}>
+                    <div className={[styles.homeImage, showPopup ? null : styles.zoomInImage].join(" ")}></div>
+                        <h1 className={[styles.homeTextHeader, showPopup ? null : styles.textMove].join(" ")}>Keep your phone connected</h1>
+                        <div className={[styles.homeTextDescription, showPopup ? null : styles.textMove].join(" ")}>WhatsApp connects to your phone to sync messages. To reduce data usage, connect your phone to Wi-Fi.</div>
+                        <div className={[styles.homeLink, showPopup ? null : styles.textMove].join(" ")}>
                             <div className={styles.homeLink_border}></div>
                             <div className={styles.homeLink_description}>
                                 <span>
