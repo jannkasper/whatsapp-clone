@@ -37,7 +37,7 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fet
                     .matches(/^[a-zA-Z0-9_-]+$/, "Contains invalid characters"),
                 password: Yup.string()
                     .required("Required")
-                    // .min(6, "Must be at least 6 characters long")
+                    .min(6, "Must be at least 6 characters long")
                     .max(50, "Must be at most 50 characters long"),
             })}
         >
