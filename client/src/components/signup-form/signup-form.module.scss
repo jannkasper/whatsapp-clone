@@ -24,25 +24,6 @@
   background: #323739;
 }
 
-.userInput {
-  margin-bottom: 15px;
-  height: 38px;
-  width: 70%;
-  padding-left: 15px;
-  border: none;
-  //border-radius: 10px;
-  box-sizing: border-box;
-  font-size: 15px;
-  border-bottom: 2px solid #00af9c;
-
-  background-color: transparent;
-  color: #f1f1f2;
-  &:focus {
-    outline: none;
-  }
-
-}
-
 .signupButton {
   height: 38px;
   width: 70%;

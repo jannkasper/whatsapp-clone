@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 import { publicFetch } from "../../util/fetcher"
 
 
 import profileImage from "../../img/avatar.svg";
 import styles from "./signup-form.module.scss";
+import FormInput from "../form-input";
 
 
 const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
@@ -34,20 +35,21 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                     console.log(error)
                 }
             }}
-            // validationSchema={Yup.object({
-            //     phoneNumber: Yup.string()
-            //         .required("Required")
-            //         .length(9, "Must be 9 characters long")
-            //         .matches(/^[0-9]+$/, "Contains invalid characters"),
-            //     username: Yup.string()
-            //         .required("Required")
-            //         .max(16, "Must be at most 16 characters long")
-            //         .matches(/^[a-zA-Z0-9_-]+$/, "Contains invalid characters"),
-            //     password: Yup.string()
-            //         .required("Required")
-            //         .min(6, "Must be at least 6 characters long")
-            //         .max(50, "Must be at most 50 characters long"),
-            // })}
+            validationSchema={Yup.object({
+                phoneNumber: Yup.string()
+                    .required("Required")
+                    .length(9, "Must be 9 characters long")
+                    .matches(/^[0-9]+$/, "Contains invalid characters"),
+                username: Yup.string()
+                    .required("Required")
+                    .min(4, "Must be at least 4 characters long")
+                    .max(16, "Must be at most 16 characters long")
+                    .matches(/^[a-zA-Z0-9_-]+$/, "Contains invalid characters"),
+                password: Yup.string()
+                    .required("Required")
+                    .min(6, "Must be at least 6 characters long")
+                    .max(50, "Must be at most 50 characters long"),
+            })}
         >
             {
                 ({
@@ -73,8 +75,8 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                             <p className={styles.imageInput}>Edit</p>
                             <img className={styles.image} src={userImage} alt="profileImage"/>
                         </label>
-                        <input
-                            className={styles.userInput}
+                        <FormInput
+                            label="PhoneNumber"
                             type="text"
                             name="phoneNumber"
                             autoComplete="off"
@@ -82,9 +84,11 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                             value={values.phoneNumber}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            hasError={touched.phoneNumber && errors.phoneNumber}
+                            errorMessage={errors.phoneNumber && errors.phoneNumber}
                         />
-                        <input
-                            className={styles.userInput}
+                        <FormInput
+                            label="Username"
                             type="text"
                             name="username"
                             autoComplete="off"
@@ -92,9 +96,11 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                             value={values.username}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            hasError={touched.username && errors.username}
+                            errorMessage={errors.username && errors.username}
                         />
-                        <input
-                            className={styles.userInput}
+                        <FormInput
+                            label="Password"
                             type="password"
                             name="password"
                             autoComplete="off"
@@ -102,7 +108,10 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                             value={values.password}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            hasError={touched.password && errors.password}
+                            errorMessage={errors.password && errors.password}
                         />
+                        <br/>
                         <button className={styles.signupButton} type="submit">Sign up</button>
                         <div className={styles.line}></div>
                         <div className={styles.text}>Have an account? <a href="!#" onClick={(e) => handleChangeMode(e)}>Log in</a></div>

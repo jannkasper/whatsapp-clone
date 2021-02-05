@@ -15,3 +15,4 @@ export { default as TailIn } from "./TailIn";
 export { default as TailOut } from "./TailOut";
 export { default as MessageCheck } from "./MessageCheck";
 export { default as Photo } from "./Photo";
+export { default as Alert } from "./Alert";

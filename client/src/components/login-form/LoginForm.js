@@ -6,6 +6,8 @@ import { publicFetch } from "../../util/fetcher";
 
 import logo from "../../img/logo.svg";
 import styles from "./login-form.module.scss";
+import * as Yup from "yup";
+import FormInput from "../form-input";
 
 const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
 
@@ -25,16 +27,17 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fet
                     console.log(error)
                 }
             }}
-            // validationSchema={Yup.object({
-            //     username: Yup.string()
-            //         .required("Required")
-            //         .max(16, "Must be at most 16 characters long")
-            //         .matches(/^[a-zA-Z0-9_-]+$/, "Contains invalid characters"),
-            //     password: Yup.string()
-            //         .required("Required")
-            //         .min(6, "Must be at least 6 characters long")
-            //         .max(50, "Must be at most 50 characters long"),
-            // })}
+            validationSchema={Yup.object({
+                username: Yup.string()
+                    .required("Required")
+                    .min(4, "Must be at least 4 characters long")
+                    .max(16, "Must be at most 16 characters long")
+                    .matches(/^[a-zA-Z0-9_-]+$/, "Contains invalid characters"),
+                password: Yup.string()
+                    .required("Required")
+                    // .min(6, "Must be at least 6 characters long")
+                    .max(50, "Must be at most 50 characters long"),
+            })}
         >
             {
                 ({ values, errors, touched, status,
@@ -42,8 +45,8 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fet
                  }) => (
                     <form onSubmit={handleSubmit} className={styles.popup_inner}>
                         <img className={styles.image} src={logo} alt="profileImage" style={{width:"35%", height: "35%"}}/>
-                        <input
-                            className={styles.userInput}
+                        <FormInput
+                            label="Username"
                             type="text"
                             name="username"
                             autoComplete="off"
@@ -51,9 +54,11 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fet
                             value={values.username}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            hasError={touched.username && errors.username}
+                            errorMessage={errors.username && errors.username}
                         />
-                        <input
-                            className={styles.userInput}
+                        <FormInput
+                            label="Password"
                             type="password"
                             name="password"
                             autoComplete="off"
@@ -61,7 +66,10 @@ const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fet
                             value={values.password}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            hasError={touched.password && errors.password}
+                            errorMessage={errors.password && errors.password}
                         />
+                        <br/>
                         <button className={styles.signupButton} type="submit">Log In</button>
                         <div className={styles.line}></div>
                         <div className={styles.text}>Don't have an account? <a href="!#" onClick={(e) => handleChangeMode(e)}>Sign up</a> </div>
