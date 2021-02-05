@@ -1,24 +1,26 @@
 import React from "react";
 import { Formik } from "formik";
 import { publicFetch } from "../../util/fetcher";
-
-// import * as Yup from "yup";
+import * as Yup from "yup";
+import FormInput from "../form-input";
 
 import logo from "../../img/logo.svg";
 import styles from "./login-form.module.scss";
-import * as Yup from "yup";
-import FormInput from "../form-input";
 
 const LoginForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fetchConversations }) => {
 
     return (
         <Formik
             initialValues={{ username: "", password: "" }}
-            onSubmit={async (values, { setStatus, resetForm}) => {
+            onSubmit={async (values, { setFieldError, setStatus, resetForm}) => {
                 try {
                     const { data } = await publicFetch.post("authenticate", values);
+                    if (data.hasError) {
+                        setFieldError(data.field, data.message);
+                        return;
+                    }
                     receiveAuthentication(data);
-                    fetchContacts();
+                    fetchContacts(data.userInfo.externalIdentifier);
                     fetchConversations(data.userInfo.externalIdentifier)
                     resetForm({})
 

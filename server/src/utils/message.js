@@ -53,3 +53,23 @@ export const createMessage = async (message) => {
         return;
     }
 }
+
+export const createExampleConversation = async (userExtId) => {
+    const defaultUser = await User.findOne({
+        username: "Welcome",
+    }, {function (err, result) {
+            if (err || !result)
+                return;
+        }});
+
+    const firstMessage = {
+        type: "text",
+        value: "Welcome in our Whatsapp application. " +
+            "You can find all users just by starting new conversation ! " +
+            "From now you can send messages and pictures to share your best moment too.",
+        userExtId: defaultUser.externalIdentifier,
+        receiverExtId: userExtId,
+        created: Date.now(),
+    }
+    await createMessage(firstMessage);
+}

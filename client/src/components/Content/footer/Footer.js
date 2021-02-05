@@ -3,7 +3,7 @@ import { Smiley, Clip, Ptt, } from "../../icons";
 import styles from "./footer.module.scss";
 
 function Footer({ createMessage }) {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState("");
     const [fileSelector, setFileSelector] = useState(null);
 
     function buildFileSelector(){
@@ -25,7 +25,6 @@ function Footer({ createMessage }) {
         // await setValue(event.target.files[0]);
         // const value = await getValue();
         createMessage({ type: "image", value: event.target.files[0] });
-        setValue(null);
     }
 
     function handleChange(event) {
@@ -35,7 +34,7 @@ function Footer({ createMessage }) {
     async function handleKeyDown(event) {
         if (event.key === 'Enter' && value) {
             await createMessage({ type: "text", value: value });
-            setValue(null);
+            setValue("");
         }
     }
     async function handleFileSelect(event) {

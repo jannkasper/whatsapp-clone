@@ -8,7 +8,16 @@
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 60%;
+}
+.messageContainerReceive {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.messageContainerSend {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .sendMessageCorner {

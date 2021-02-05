@@ -8,7 +8,7 @@ router.post('/signup', validateUser, signup);
 router.post('/authenticate', validateUser, authenticate);
 
 //users
-router.get('/users', listUsers);
+router.get("/users/:userExtId", listUsers);
 
 //messages
 router.post("/message", validateMessage, createMessage);

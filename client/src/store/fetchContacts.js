@@ -1,10 +1,10 @@
 import { fetchContactsPending, fetchContactsSuccess, fetchContactsError } from "../actions";
 import {publicFetch} from "../util/fetcher";
 
-function fetchContacts() {
+function fetchContacts(userExtId) {
     return dispatch => {
         dispatch(fetchContactsPending());
-        publicFetch.get("users")
+        publicFetch.get(`users/${userExtId}`)
             .then(res => {
                 if(res.error) {
                     dispatch(fetchContactsError(res.error));

@@ -7,7 +7,7 @@ function Message(props) {
 
     return (
         <div className={styles.viewResize}>
-            <div className={styles.messageContainer}>
+            <div className={[styles.messageContainer, props.isAuthor ? styles.messageContainerSend : styles.messageContainerReceive].join(' ')}>
                 <div className={[styles.message, props.isAuthor ? styles.sendMessage : styles.receivedMessage].join(' ')}>
                     { props.isAuthor ? (
                         <div className={styles.sendMessageCorner}>

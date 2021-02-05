@@ -15,7 +15,7 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
     return (
         <Formik
             initialValues={{ file: null, phoneNumber: "", username: "", password: "" }}
-            onSubmit={async (values, { setStatus, resetForm}) => {
+            onSubmit={async (values, { setFieldError, setStatus, resetForm}) => {
                 try {
                     let formData = new FormData();
                     formData.append('profileImage', values.file);
@@ -24,6 +24,10 @@ const SignupForm = ({ handleChangeMode, receiveAuthentication, fetchContacts, fe
                     formData.append('password', values.password);
 
                     const { data } = await publicFetch.post("signup", formData);
+                    if (data.hasError) {
+                        setFieldError(data.field, data.message);
+                        return;
+                    }
                     receiveAuthentication(data);
                     fetchContacts();
                     fetchConversations(data.userInfo.externalIdentifier)

@@ -4,6 +4,7 @@ import shortId from 'shortid';
 import { body, validationResult } from "express-validator";
 import User from "../models/user.js"
 import { createToken, verifyPassword } from "../utils/authentication.js";
+import { createExampleConversation } from "../utils/message.js";
 import { getIO } from "../index.js";
 
 export const signup = async (req, res) => {
@@ -16,10 +17,10 @@ export const signup = async (req, res) => {
     try {
         const { phoneNumber, username, password } = req.body;
 
-        const existingUsername = await User.findOne({ username })
+        const existingUsername = await User.findOne({ username: { $regex : new RegExp(username, "i") } })
 
         if (existingUsername) {
-            return res.status(400).json({ message: "Username already exists." });
+            return res.status(200).json({ hasError: true, field: "username", message: "Username already exists." });
         };
 
         const userData = {
@@ -38,6 +39,8 @@ export const signup = async (req, res) => {
             const expiresAt = decodedToken.exp;
 
             getIO().emit("USER_ENTER", { contact: savedUser });
+
+            await createExampleConversation(savedUser.externalIdentifier);
 
             const { externalIdentifier, username, phoneNumber, profileImage, created } = savedUser;
             const userInfo = { externalIdentifier, username, phoneNumber, profileImage, created };
@@ -68,11 +71,11 @@ export const authenticate = async (req, res) => {
         const { username, password } = req.body;
 
         const user = await User.findOne({
-            username: username.toLowerCase()
+            username: { $regex : new RegExp(username, "i") }
         });
         
         if (!user) {
-            return res.status(403).json({ message: "Wrong username or password."})
+            return res.status(200).json({ hasError: true, field: "username", message: "Username doesn't exists." });
         }
 
         const passwordValid = await verifyPassword(password, user.password);
@@ -92,7 +95,7 @@ export const authenticate = async (req, res) => {
                 expiresAt
             });
         } else {
-            res.status(403).json({ message: 'Wrong username or password.' });
+            return res.status(200).json({ hasError: true, field: "password", message: "Wrong password." });
         }
 
     } catch (error) {
@@ -102,7 +105,8 @@ export const authenticate = async (req, res) => {
 
 export const listUsers = async (req, res, next) => {
     try {
-        const users = await User.find();
+        const userExtId = req.params.userExtId;
+        const users = await User.find({ externalIdentifier: {$ne: userExtId} });
         res.json(users);
     } catch (error) {
         next(error);
