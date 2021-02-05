@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./header";
 import Search from "./search";
 import ContactGroup from "./contactGroup";
@@ -9,13 +9,15 @@ import ContactsNavigation from "../ContactsNavigation";
 
 
 function Sidebar({ selectedContact, contactArray }) {
+    const [searchText, setSearchText] = useState("");
+
     return (
         <div className={styles.sidebar}>
             <ContactsNavigation />
             <Header />
             <Notification />
-            <Search placeHolder={"Search or start new chat"}/>
-            <ContactGroup chats={contactArray} selectedContact={selectedContact} isSidebar />
+            <Search placeHolder={"Search or start new chat"} searchText={searchText} setSearchText={setSearchText} />
+            <ContactGroup chats={contactArray.filter(contact => contact.username.toLowerCase().includes(searchText.toLowerCase()))} selectedContact={selectedContact} isSidebar />
         </div>
     )
 }

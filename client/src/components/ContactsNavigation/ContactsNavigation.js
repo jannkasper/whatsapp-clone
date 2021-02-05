@@ -6,11 +6,8 @@ import Search from "../Sidebar/search";
 import styles from "./contactsNavigation.module.scss"
 
 const ContactsNavigation = ({ contactArray, openContactsNavigation }) => {
-
     const [visibility, setVisibility] = useState("hidden");
     const [searchText, setSearchText] = useState("");
-
-    console.log(searchText);
 
     useEffect(() => {
         setTimeout(function() {
