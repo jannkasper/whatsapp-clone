@@ -31,9 +31,6 @@ const init = async () => {
     mongoose.connection.on("error", console.log);
 };
 
-function areWeTestingWithJest() {
-    return process.env.JEST_WORKER_ID !== undefined;
-}
-if (!areWeTestingWithJest()) {
+if (process.env.JEST_WORKER_ID === undefined) {
     init();
 }

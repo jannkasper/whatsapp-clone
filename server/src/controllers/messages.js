@@ -87,6 +87,18 @@ export const createMessage = async (req, res) => {
             return res.status(400).json({ message: "Missed required values in request."})
         }
 
+        const sender = await User.findOne({
+            externalIdentifier: userExtId,
+        });
+
+        const receiver = await User.findOne({
+            externalIdentifier: receiverExtId,
+        });
+
+        if (!sender || !receiver) {
+            return res.status(400).json({ message: "There was a problem find user in database."})
+        }
+
         let existingSession = await Session.findOne({
             externalIdentifier: sessionExtId || createSessionExtIdentifier(userExtId, receiverExtId),
         });
@@ -98,13 +110,6 @@ export const createMessage = async (req, res) => {
                 return res.status(400).json({ message: "Problem creating new session"})
             }
         }
-
-        const sender = await User.findOne({
-            externalIdentifier: userExtId,
-        }, {function (err, result) {
-            if (err || !result)
-                return res.status(400).json({ message: "There was a problem find user in database."})
-            }});
 
         const savedMessage = await new Message({
             type: type,

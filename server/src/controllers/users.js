@@ -20,7 +20,7 @@ export const signup = async (req, res) => {
         const existingUsername = await User.findOne({ username: { $regex : new RegExp(username, "i") } })
 
         if (existingUsername) {
-            return res.status(200).json({ hasError: true, field: "username", message: "Username already exists." });
+            return res.status(400).json({ hasError: true, field: "username", message: "Username already exists." });
         };
 
         const userData = {
@@ -40,7 +40,9 @@ export const signup = async (req, res) => {
 
             getIO().emit("USER_ENTER", { contact: savedUser });
 
-            await createExampleConversation(savedUser.externalIdentifier);
+            if (process.env.JEST_WORKER_ID === undefined) {
+                await createExampleConversation(savedUser.externalIdentifier);
+            }
 
             const { externalIdentifier, username, phoneNumber, profileImage, created } = savedUser;
             const userInfo = { externalIdentifier, username, phoneNumber, profileImage, created };
@@ -75,7 +77,7 @@ export const authenticate = async (req, res) => {
         });
         
         if (!user) {
-            return res.status(200).json({ hasError: true, field: "username", message: "Username doesn't exists." });
+            return res.status(403).json({ hasError: true, field: "username", message: "Username doesn't exists." });
         }
 
         const passwordValid = await verifyPassword(password, user.password);
@@ -95,7 +97,7 @@ export const authenticate = async (req, res) => {
                 expiresAt
             });
         } else {
-            return res.status(200).json({ hasError: true, field: "password", message: "Wrong password." });
+            return res.status(403).json({ hasError: true, field: "password", message: "Wrong password." });
         }
 
     } catch (error) {
@@ -113,4 +115,46 @@ export const listUsers = async (req, res, next) => {
     }
 }
 
-export const validateUser = []
+export const validateUser = [
+    body("phoneNumber")
+        .exists()
+        .trim()
+        .withMessage("is required")
+
+        .notEmpty()
+        .withMessage("cannot be blank")
+
+        .isLength({ min:6, max: 12 })
+        .withMessage('must be between 6 and 12 characters long')
+
+        .matches(/^[0-9_-]+$/)
+        .withMessage('contains invalid characters'),
+
+    body("username")
+        .exists()
+        .trim()
+        .withMessage("is required")
+
+        .notEmpty()
+        .withMessage("cannot be blank")
+
+        .isLength({ max: 16 })
+        .withMessage('must be at most 16 characters long')
+
+        .matches(/^[a-zA-Z0-9_-]+$/)
+        .withMessage('contains invalid characters'),
+
+    body('password')
+        .exists()
+        .trim()
+        .withMessage('is required')
+
+        .notEmpty()
+        .withMessage('cannot be blank')
+
+        .isLength({ min: 6 })
+        .withMessage('must be at least 6 characters long')
+
+        .isLength({ max: 50 })
+        .withMessage('must be at most 50 characters long')
+];
