@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Smiley, Clip, Ptt, } from "../../icons";
 import styles from "./footer.module.scss";
 
 function Footer({ createMessage }) {
     const [value, setValue] = useState("");
-    const [fileSelector, setFileSelector] = useState(null);
-
-    function buildFileSelector(){
-        const fileSelector = document.createElement('input');
-        fileSelector.setAttribute('type', 'file');
-        fileSelector.setAttribute('accept', 'image/jpeg, image/png');
-        // fileSelector.setAttribute('multiple', 'multiple');
-        fileSelector.onchange = handleSendFile;
-        return fileSelector;
-    }
-
-    useEffect(() => {
-        if (fileSelector == null) {
-            setFileSelector(buildFileSelector());
-        }
-    })
 
     async function handleSendFile(event) {
         // await setValue(event.target.files[0]);
@@ -33,13 +17,11 @@ function Footer({ createMessage }) {
 
     async function handleKeyDown(event) {
         if (event.key === 'Enter' && value) {
-            await createMessage({ type: "text", value: value });
+            try {
+                await createMessage({ type: "text", value: value })
+            } catch(e) { console.log(e) }
             setValue("");
         }
-    }
-    async function handleFileSelect(event) {
-        event.preventDefault();
-        fileSelector.click();
     }
 
     return (
@@ -58,12 +40,21 @@ function Footer({ createMessage }) {
                 {/*<div className={styles.icon}>*/}
                 {/*    <Sticker />*/}
                 {/*</div>*/}
-                <div className={styles.icon} onClick={event => handleFileSelect(event)}>
+                <input
+                    role="inputFile"
+                    id="file"
+                    type="file"
+                    accept="image/jpeg, image/png"
+                    onChange={event => handleSendFile(event)}
+                    style={{display: "none"}}
+                />
+                <label htmlFor="file" className={styles.icon}>
                     <Clip />
-                </div>
+                </label>
             </div>
 
             <input
+                role="inputText"
                 className={styles.userInput}
                 value={value}
                 onChange={event => handleChange(event)}
