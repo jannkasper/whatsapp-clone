@@ -1,7 +1,7 @@
-import { validUser, validMessage } from "./factories";
-import User from "../src/models/user";
+import { validUser, validMessage } from "../factories";
+import User from "../../src/models/user";
 import request from "supertest";
-import app from "../src/app";
+import app from "../../src/app";
 
 describe('Message endpoint', () => {
     let user1, user2, message;

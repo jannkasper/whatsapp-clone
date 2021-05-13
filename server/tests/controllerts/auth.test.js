@@ -1,8 +1,8 @@
 import request from 'supertest';
-import User from '../src/models/user.js'
+import User from '../../src/models/user.js'
 import jwtDecode from 'jwt-decode';
-import app from '../src/app.js';
-import { validUser } from './factories.js';
+import app from '../../src/app.js';
+import { validUser } from '../factories.js';
 
 
 describe('Authorization endpoints', () => {
