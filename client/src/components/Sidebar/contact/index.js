@@ -24,7 +24,7 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
         } else if ( differenceInDays(Date.now(), date) <= 7 ) {
             return format(date, "dddd");
         } else {
-            format(date, "dd/MM/yyyy");
+            return format(date, "dd/MM/yyyy");
         }
     }
 
@@ -38,6 +38,7 @@ function Contact({ externalIdentifier, name, profileImage, status, lastMessage, 
     }
     return (
         <div className={`${styles.contactContainer} ${isSelected ? styles.contactSelected : null }`}
+             role="selectContact"
              onClick={() => {
                  setSelectedContact({contactExtId: externalIdentifier });
                  selectConversation({contactExtId: externalIdentifier })
