@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact component should display 1`] = `
+<DocumentFragment>
+  <div
+    class="contactContainer null"
+    role="selectContact"
+  >
+    <div
+      class="contactImage"
+    >
+      <img
+        alt="profileImage"
+        src="avatar.svg"
+      />
+    </div>
+    <div
+      class="contactDetails"
+    >
+      <div
+        class="contactName"
+      >
+        <span>
+          nameTest
+        </span>
+        <div>
+          10/11/2020
+        </div>
+      </div>
+      <div
+        class="contactLastMessage"
+      >
+        <div
+          class="contactLastMessage_inner"
+        >
+          <span
+            class="span"
+          >
+            valueTest
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

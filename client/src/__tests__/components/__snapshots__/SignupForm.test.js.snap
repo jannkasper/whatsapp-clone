@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupForm component should display 1`] = `
+<DocumentFragment>
+  <form
+    class="popup_inner"
+  >
+    <label
+      for="image"
+    >
+      <input
+        accept="image/x-png,image/gif,image/jpeg"
+        id="image"
+        label="userImage"
+        name="file"
+        style="display: none;"
+        type="file"
+        value=""
+      />
+      <p
+        class="imageInput"
+      >
+        Edit
+      </p>
+      <img
+        alt="profileImage"
+        class="image"
+        src="avatar.svg"
+      />
+    </label>
+    <div
+      class="container"
+    >
+      <div
+        class="inputContainer"
+      >
+        <input
+          autocomplete="off"
+          class="input false"
+          for="PhoneNumber"
+          name="phoneNumber"
+          placeholder="Phone number"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      class="container"
+    >
+      <div
+        class="inputContainer"
+      >
+        <input
+          autocomplete="off"
+          class="input false"
+          for="Username"
+          name="username"
+          placeholder="Username"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      class="container"
+    >
+      <div
+        class="inputContainer"
+      >
+        <input
+          autocomplete="off"
+          class="input false"
+          for="Password"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </div>
+    </div>
+    <br />
+    <button
+      class="signupButton"
+      type="submit"
+    >
+      Sign up
+    </button>
+    <div
+      class="line"
+    />
+    <div
+      class="text"
+    >
+      Have an account? 
+      <a
+        href="!#"
+      >
+        Log in
+      </a>
+    </div>
+  </form>
+</DocumentFragment>
+`;

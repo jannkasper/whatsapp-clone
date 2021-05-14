@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm component should display 1`] = `
+<DocumentFragment>
+  <form
+    class="popup_inner"
+  >
+    <img
+      alt="profileImage"
+      class="image"
+      src="logo.svg"
+      style="width: 35%; height: 35%;"
+    />
+    <div
+      class="container"
+    >
+      <div
+        class="inputContainer"
+      >
+        <input
+          autocomplete="off"
+          class="input false"
+          for="Username"
+          name="username"
+          placeholder="Username"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      class="container"
+    >
+      <div
+        class="inputContainer"
+      >
+        <input
+          autocomplete="off"
+          class="input false"
+          for="Password"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </div>
+    </div>
+    <br />
+    <button
+      class="signupButton"
+      type="submit"
+    >
+      Log In
+    </button>
+    <div
+      class="line"
+    />
+    <div
+      class="text"
+    >
+      Don't have an account? 
+      <a
+        href="!#"
+      >
+        Sign up
+      </a>
+       
+    </div>
+  </form>
+</DocumentFragment>
+`;
