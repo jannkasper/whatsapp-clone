@@ -1,70 +1,153 @@
-# Getting Started with Create React App
+## Whatsapp Clone
+- Live: http://whatsapp-jannkasper.vercel.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Product Name Screen Shot][product-screenshot]](https://github.com/jannkasper/whatsapp-react-clone/images/screenshot.png)
 
-## Available Scripts
+## :rocket: Tech Stack
 
-In the project directory, you can run:
+- ReactJs
+- Redux
+- Socket.io
+- NodeJs
+- Axios
+- Express
+- MongoDB
+- Mongoose
+- Testing Library
+- Jest
 
-### `yarn start`
+## :warning: Prerequisite
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- node
+- npm
+- mongodb
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## :cd: How to run local
 
-### `yarn test`
+```bash
+# Clone this repository
+$ git clone https://github.com/jannkasper/whatsapp-react-clone
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Go into the repository
+$ cd whatsapp-react-clone
 
-### `yarn build`
+# Go into server
+$ cd server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#Create configuration file
+$ echo 'DATABASE_URL=<mongodb-url>' > .env
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Install dependencies
+$ npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Start the backend server
+$ npm run dev
 
-### `yarn eject`
+# On another terminal, go to the client folder
+$ cd ../client
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#Create configuration file
+$ echo 'REACT_APP_SITE_NAME=<server-host>' > .env
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install dependencies
+$ npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Use the command below for Android devices
+$ npm run dev
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## :mag_right: Testing
 
-## Learn More
+Make sure mongodb is running before testing the server.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+$ cd server
+$ #Create configuration file
+$ echo 'TEST_DATABASE_URL=<mongodb-url>' > .env
+$ npm run test
+$
+$ cd ../client
+$ npm run test
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## :globe_with_meridians: Deploy
 
-### Code Splitting
+#### Deploying Server App on Heroku
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-  You will need to have setup a [MongoDB Atlas account and database](https://docs.atlas.mongodb.com/getting-started/).
+- Make sure that the cluster has allowlisted connections from anywhere.
+- Create a [Heroku](https://dashboard.heroku.com/new-app) new app.
+- Go to app settings
+- Add the following enviroments.
+    - DATABASE_URL (to use your MongoDB connection string)
+- Add Nodejs to buildpacks
 
-### Analyzing the Bundle Size
+-
+      # Go into the repository
+      $ cd whatsapp-react-clone
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+      # Heroku Setup
+      $ npm install -g heroku
+      $ heroku login
+      $ heroku git:remote -a your-app-name
 
-### Making a Progressive Web App
+      # push subdirectory repository with subtree
+      $ git subtree push --prefix server heroku master
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Deploying Client App on Vercel
 
-### Advanced Configuration
+- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fjannkasper%2Fwhatsapp-react-clone&env=REACT_APP_SITE_NAME)
+- Select client directory
+- Add heroku api url to REACT_APP_SITE_NAME enviorement
+- Finally deploy client application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## :book: Directory Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+├── app/
+│   ├── client/
+│   │   ├── public/
+│   │   ├── src/
+│   │   │   ├── __tests__/
+│   │   │   ├── actions/
+│   │   │   ├── api/
+│   │   │   ├── components/
+│   │   │   ├── img/
+│   │   │   ├── reducers/
+│   │   │   ├── store/
+│   │   │   ├── util/
+│   │   │   ├── index.css
+│   │   │   ├── index.js
+│   │   │   └── setupTests.js
+│   │   │
+│   │   ├── .env
+│   │   ├── jest.config.js
+│   │   └── package.json
+│   │
+│   ├── server/
+│   │   ├── public/
+│   │   ├── src/
+│   │   │   ├── controllers/
+│   │   │   ├── models/
+│   │   │   ├── utils/
+│   │   │   ├── app.js
+│   │   │   ├── config.js
+│   │   │   ├── index.js
+│   │   │   ├── routes.js
+│   │   │   └── socket.js
+│   │   │
+│   │   └── tests/
+│   │
+```
 
-### `yarn build` fails to minify
+## :memo: License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is made available under the MIT License.
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[product-screenshot]: images/screenshot.png
