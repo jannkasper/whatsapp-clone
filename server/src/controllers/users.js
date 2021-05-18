@@ -111,25 +111,11 @@ export const listUsers = async (req, res, next) => {
         const users = await User.find({ externalIdentifier: {$ne: userExtId} });
         res.json(users);
     } catch (error) {
-        next(error);
+        next(error.message);
     }
 }
 
-export const validateUser = [
-    body("phoneNumber")
-        .exists()
-        .trim()
-        .withMessage("is required")
-
-        .notEmpty()
-        .withMessage("cannot be blank")
-
-        .isLength({ min:6, max: 12 })
-        .withMessage('must be between 6 and 12 characters long')
-
-        .matches(/^[0-9_-]+$/)
-        .withMessage('contains invalid characters'),
-
+export const validateAuthorisation = [
     body("username")
         .exists()
         .trim()
@@ -157,4 +143,19 @@ export const validateUser = [
 
         .isLength({ max: 50 })
         .withMessage('must be at most 50 characters long')
-];
+]
+export const validateUser = [
+    body("phoneNumber")
+        .exists()
+        .trim()
+        .withMessage("is required")
+
+        .notEmpty()
+        .withMessage("cannot be blank")
+
+        .isLength({ min:6, max: 12 })
+        .withMessage('must be between 6 and 12 characters long')
+
+        .matches(/^[0-9_-]+$/)
+        .withMessage('contains invalid characters'),
+].concat(validateAuthorisation);

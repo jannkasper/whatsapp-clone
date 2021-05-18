@@ -1,11 +1,11 @@
 import express from "express";
-import { validateUser, signup, authenticate, listUsers } from "./controllers/users.js";
+import { validateUser, validateAuthorisation, signup, authenticate, listUsers } from "./controllers/users.js";
 import { validateMessage, createMessage, loadMessages } from "./controllers/messages.js"
 
 const router = express.Router();
 //authentication
 router.post('/signup', validateUser, signup);
-router.post('/authenticate', validateUser, authenticate);
+router.post('/authenticate', validateAuthorisation, authenticate);
 
 //users
 router.get("/users/:userExtId", listUsers);
