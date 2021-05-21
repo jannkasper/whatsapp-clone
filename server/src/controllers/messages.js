@@ -5,7 +5,6 @@ import Session from "../models/session.js";
 import UserSession from "../models/userSession.js";
 import Message from "../models/message.js"
 import {determineValue} from "../utils/message.js";
-import _ from "lodash";
 
 export const loadMessages =  async  (req, res) => {
     const result = validationResult(req);
