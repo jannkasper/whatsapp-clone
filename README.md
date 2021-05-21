@@ -1,7 +1,7 @@
 ## Whatsapp Clone
-- Live: http://whatsapp-jannkasper.vercel.app/
+- Live: http://whatsapp-jannkasper.vercel.app/ (be patient, server is sleeping)
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/jannkasper/whatsapp-react-clone/images/screenshot.png)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/jannkasper/whatsapp-react-clone/blob/master/images/video.gif)
 
 ## :rocket: Tech Stack
 
@@ -28,13 +28,10 @@
 # Clone this repository
 $ git clone https://github.com/jannkasper/whatsapp-react-clone
 
-# Go into the repository
-$ cd whatsapp-react-clone
-
 # Go into server
-$ cd server
+$ cd whatsapp-react-clone/server
 
-#Create configuration file
+# Create configuration file
 $ echo 'DATABASE_URL=<mongodb-url>' > .env
 
 # Install dependencies
@@ -44,16 +41,16 @@ $ npm install
 $ npm run dev
 
 # On another terminal, go to the client folder
-$ cd ../client
+$ cd whatsapp-react-clone/client
 
-#Create configuration file
+# Create configuration file
 $ echo 'REACT_APP_SITE_NAME=<server-host>' > .env
 
 # Install dependencies
 $ npm install
 
-# Use the command below for Android devices
-$ npm run dev
+# Start the frontend client
+$ npm run start
 ```
 
 ## :mag_right: Testing
@@ -61,7 +58,7 @@ $ npm run dev
 Make sure mongodb is running before testing the server.
 
 ```bash
-$ cd server
+$ cd whatsapp-react-clone/server
 $ #Create configuration file
 $ echo 'TEST_DATABASE_URL=<mongodb-url>' > .env
 $ npm run test
@@ -137,7 +134,11 @@ $ npm run test
 │   │   │   ├── routes.js
 │   │   │   └── socket.js
 │   │   │
-│   │   └── tests/
+│   │   ├── tests/
+│   │   ├── .babelrc
+│   │   ├── .env
+│   │   ├── jest.config.js
+│   │   └── package.json
 │   │
 ```
 
@@ -150,4 +151,4 @@ This project is made available under the MIT License.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/video.gif
